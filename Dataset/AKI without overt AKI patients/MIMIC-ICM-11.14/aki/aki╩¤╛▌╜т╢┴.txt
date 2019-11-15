@@ -1,0 +1,55 @@
+is_vent_aki文件夹数据解读
+
+
+1.aki_bg 
+    
+    插值方法为向上插值 
+
+    计算 PAO2/FIO2 单独成列作为feature
+
+2.aki_cohort 
+
+    本课题研究的是入院7天内发生的事件，因此，张开时间序列时注意，有的患者的OUT_TIME 时大于7天的，有的是小于7天的，小于7天的就用实际的OUT_TIME，大于7天的，截止住院第7天即可。
+
+    LOS 为住院时间，不能作为feature
+
+    ICUSTAY_ID   ADMI_TIME  OUT_TIME 都不能作为feature 
+
+    ICU_CLASS	AGE	GENDER	ETHNICITY	HEIGHT	WEIGHT	BMI  可作为feature
+
+3.aki_input 和aki_output
+
+    需要计算 INPUT minus OUTPUT 单独成列作为feature
+
+    缺值以0代替
+
+4.aki_lab
+
+    插值方法为线性插值
+
+5.aki_vaso
+ 
+
+    VASO_STARTTIME 和 VASO_ENDTIME 时间区间内都标记为 1 表示正在进行vaso用药
+    
+    其余时间点标记0 表示没有进行vaso
+
+6.aki_vit
+
+    插值方法为线性插值
+    
+7.aki_label
+
+    这个数据是定义发生 aki的
+    
+    不插值 
+
+
+8.aki_mechvent
+
+    定义是否进行了mechvent
+
+    MECHVENT_STARTTIME 和 MECHVENT_ENDTIME 时间区间内都标记为 1 表示正在进行mechvent 
+    
+    其它时间点都标记为 0 表示没有进行mechvent
+   

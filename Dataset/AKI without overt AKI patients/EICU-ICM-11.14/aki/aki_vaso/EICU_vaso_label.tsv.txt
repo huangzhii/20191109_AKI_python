@@ -1,0 +1,3 @@
+ICUSTAY_ID	VASO_TIME	VASO_LABEL
+
+								

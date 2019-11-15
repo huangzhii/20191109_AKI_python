@@ -42,6 +42,27 @@ def expand_data(x, group):
     if group == 'aki': after_expand['AKI'][-1] = 1
     return after_expand
 
+def merge_mech_vaso(x, data, feature_name):
+    keys = list(data.keys())
+    icuid = x['ICUSTAY_ID'].values[0]
+    
+    # Start time
+    startkey, endkey = [k for k in keys if 'start' in k][0], [k for k in keys if 'end' in k][0]
+    data_starts = data[startkey].loc[data[startkey].ICUSTAY_ID == icuid,:]
+    data_ends = data[endkey].loc[data[endkey].ICUSTAY_ID == icuid,:]
+    if len(data_starts) < 1 and len(data_ends) < 1: return
+    if len(data_starts) != len(data_ends) < 1:
+        print('Error: start time and end time inconsistent')
+        
+    data_starts.reset_index(drop = True, inplace = True)
+    data_ends.reset_index(drop = True, inplace = True)
+    x[feature_name] = 0
+    for i in range(len(data_starts)):
+        starttime = pd.to_datetime(data_starts.iloc[i, 1])
+        endtime = pd.to_datetime(data_ends.iloc[i, 1])
+        x.loc[x.CURR_TIME.between(starttime, endtime), feature_name] = 1
+    return x
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -53,8 +74,8 @@ if __name__ == '__main__':
     args = parse_args()
     
     datadir = {}
-    datadir['MIMIC'] = workdir + 'Dataset/' + 'MIMIC11.11/'
-    datadir['EICU'] = workdir + 'Dataset/' + 'EICU11.11/'
+    datadir['MIMIC'] = workdir + 'Dataset/AKI without overt AKI patients/' + 'MIMIC-ICM-11.14/'
+    datadir['EICU'] = workdir + 'Dataset/AKI without overt AKI patients/' + 'EICU-ICM-11.14/'
     
     datagroup = ['bg', 'cohort', 'input', 'lab', 'mechvent', 'output', 'statistic', 'vaso', 'vit']
     data_expand = {}
@@ -132,29 +153,28 @@ if __name__ == '__main__':
     # =============================================================================
     #      mechvent_starttime mechvent_endtime
     # =============================================================================
+        data = {}    
         for t in ['starttime', 'endtime']:
             colnames = pd.read_csv(datadir['MIMIC'] + group +'/' + group + '_mechvent/mechvent_'+ t +'/MIMIC_AKI_mechvent.txt', sep = '\t').columns.values.astype(str)
-            data = pd.read_csv(datadir['MIMIC'] + group +'/' + group + '_mechvent/mechvent_'+ t +'/mimic_mimiciii_aki_kidgo_'+positivity+'_mechvent_'+ t +'.csv', header=None)
-            data.columns = colnames
-            data['CURR_TIME'] = pd.to_datetime(data['MECHVENT_' + t.upper()])
-            data.drop_duplicates(subset = ['ICUSTAY_ID', 'CURR_TIME'], keep = 'first', inplace = True)
-            data_expand[group] = data_expand[group].merge(data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left')
-            
+            data[t] = pd.read_csv(datadir['MIMIC'] + group +'/' + group + '_mechvent/mechvent_'+ t +'/mimic_mimiciii_aki_kidgo_'+positivity+'_mechvent_'+ t +'.csv', header=None)
+            data[t].columns = colnames
+        data_expand[group] = data_expand[group].groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: merge_mech_vaso(x, data, 'MECH'))
+        data_expand[group].reset_index(drop = True, inplace = True)
     # =============================================================================
     #      vaso_starttime vaso_endtime
     # =============================================================================
+        data = {}    
         for t in ['start', 'end']:
             colnames = pd.read_csv(datadir['MIMIC'] + group +'/' + group + '_vaso/vaso_'+ t +'/MIMIC_vaso_label.tsv.txt', sep = '\t').columns.values.astype(str)
-            data = pd.read_csv(datadir['MIMIC'] + group +'/' + group + '_vaso/vaso_'+ t +'/mimic_mimiciii_aki_kidgo_'+positivity+'_vasopressor_'+t+'time.csv', header=None)
-            data.columns = colnames
-            data['CURR_TIME'] = pd.to_datetime(data['VASO_' + t.upper() + 'TIME'])
-            data.drop_duplicates(subset = ['ICUSTAY_ID', 'CURR_TIME'], keep = 'first', inplace = True)
-            data_expand[group] = data_expand[group].merge(data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left')
+            data[t] = pd.read_csv(datadir['MIMIC'] + group +'/' + group + '_vaso/vaso_'+ t +'/mimic_mimiciii_aki_kidgo_'+positivity+'_vasopressor_'+t+'time.csv', header=None)
+            data[t].columns = colnames
+        data_expand[group] = data_expand[group].groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: merge_mech_vaso(x, data, 'VASO'))
+        data_expand[group].reset_index(drop = True, inplace = True)
             
             
             
     data_expand_all = pd.concat((data_expand['aki'], data_expand['non_aki']))
-
+    data_expand_all.columns
 #    colnames_we_need = ["ICUSTAY_ID","ICU_CLASS","ETHNICITY","AGE","GENDER","LOS",\
 #                        "HEIGHT","WEIGHT","BMI","ISOFA","SEP","CAR","RES","OD",\
 #                        "CKD","DIA","CHF","CLD","CPD","HYP","ADMI_TIME","OUT_TIME",\
@@ -180,4 +200,4 @@ if __name__ == '__main__':
     colnames_we_need = demotraphic_information + vital_signs + laboratory_values + fluid_balance + \
                         addtional_respiratory_and_hemodynamic_support + primary_diagnosis + comorbidities + others
     
-    data_expand = data_expand[colnames_we_need]
+    data_expand_all = data_expand_all[colnames_we_need]
