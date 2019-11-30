@@ -174,18 +174,19 @@ if __name__ == '__main__':
             
             
     data_expand_all = pd.concat((data_expand['aki'], data_expand['non_aki']))
-    data_expand_all.columns
-#    colnames_we_need = ["ICUSTAY_ID","ICU_CLASS","ETHNICITY","AGE","GENDER","LOS",\
-#                        "HEIGHT","WEIGHT","BMI","ISOFA","SEP","CAR","RES","OD",\
-#                        "CKD","DIA","CHF","CLD","CPD","HYP","ADMI_TIME","OUT_TIME",\
-#                        "CURR_TIME","DIAS_BP","HR","SYS_BP","MEAN_BP","RR","TEM","SPO2",\
-#                        "PH","CA_ION","HGB","WBC","RBC","HCT","PLT","RDW",\
-#                        "CRP","HCO3","ALT","AST","ALB","TBB","TNT","CK","CKMB","CR",\
-#                        "UN","AMI","LIP","BNP","CL_ION","GLU","K_ION","NA_ION",\
-#                        "APTT","PT","INR","DD","FIB","LAC","AG","P_ION","MG_ION",\
-#                        "INPUT_6HR","INPUT_12HR","INPUT_24HR","OUTPUT_6HR","OUTPUT_12HR",\
-#                        "OUTPUT_24HR","FIO2","PCO2","PO2","MECHVENT_STARTTIME",\
-#                        "MECHVENT_ENDTIME","VASO_STARTTIME","VASO_ENDTIME"] # ['NEU', 'NEU_PER'] not in index
+    
+    unique_ID = {}
+    unique_ID['aki'] = data_expand['aki'].ICUSTAY_ID.unique()
+    unique_ID['non_aki'] = data_expand['non_aki'].ICUSTAY_ID.unique()
+    
+    print('Unique ICUSTAY_ID: AKI: %d, None-AKI: %d' % (len(unique_ID['aki']), len(unique_ID['non_aki'])))
+    
+    data_expand_all['PF'] = data_expand_all['PO2'] / data_expand_all['FIO2']
+    data_expand_all['BMI'] = data_expand_all['WEIGHT'] / ((data_expand_all['HEIGHT']/100) ** 2)
+    
+    # =============================================================================
+    #     Get columns we needed
+    # =============================================================================
     
     demotraphic_information = ["ICUSTAY_ID","AGE","GENDER","ETHNICITY","HEIGHT","WEIGHT","BMI"]
     vital_signs = ["TEM","HR","RR","DIAS_BP","SYS_BP","MEAN_BP","SPO2"]
@@ -193,7 +194,8 @@ if __name__ == '__main__':
                          "HGB","HCT","PLT","PF","ALT","AST","TBB","UN","CR"] #CR is SCr
     fluid_balance = ["INPUT_6HR","INPUT_12HR","INPUT_24HR","OUTPUT_6HR","OUTPUT_12HR","OUTPUT_24HR"]
     addtional_respiratory_and_hemodynamic_support = ["VASO", "MECH"]
-    primary_diagnosis = ["SEP", "CAR", "NEU", "RES", "OD"]
+    primary_diagnosis = ["SEP", "CAR", "NEU", "RES", "OD"] # we don't need NEU
+    primary_diagnosis = ["SEP", "CAR", "RES", "OD"] # we don't need NEU
     comorbidities = ["HYP","DIA","CHF", "CPD", "CKD", "CLD"]
     others = ["HOURS", "ISOFA", "AKI"]
     
@@ -201,3 +203,16 @@ if __name__ == '__main__':
                         addtional_respiratory_and_hemodynamic_support + primary_diagnosis + comorbidities + others
     
     data_expand_all = data_expand_all[colnames_we_need]
+    
+    
+    data_expand_all.to_csv(workdir + 'Processed_Data/data_expand.csv')
+    # =============================================================================
+    #     Imputation - positive
+    # =============================================================================
+
+
+
+
+
+
+
