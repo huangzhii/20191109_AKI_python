@@ -41,7 +41,8 @@ def expand_data(x, group):
     after_expand['CURR_TIME'] = after_expand.index
     after_expand['HOURS'] = range(1, len(after_expand) + 1)
     after_expand['AKI'] = 0
-    if group == 'aki': after_expand['AKI'][-1] = 1
+#    if group == 'aki': after_expand['AKI'][-1] = 1
+    if group == 'aki': after_expand['AKI'] = 1 # should all be 1
     return after_expand
 
 def merge_mech_vaso(x, data, feature_name, cohort):
@@ -84,7 +85,7 @@ if __name__ == '__main__':
     datadir['EICU'] = workdir + 'Dataset/AKI without overt AKI patients/' + 'EICU-ICM-11.14/'
     
     for cohort in datadir.keys():
-        print('Currently processing cohort', cohort)
+        print('\nCurrently processing cohort', cohort)
         datagroup = ['bg', 'cohort', 'input', 'lab', 'mechvent', 'output', 'statistic', 'vaso', 'vit']
         data_expand = {}
         
@@ -268,8 +269,3 @@ if __name__ == '__main__':
         
         data_expand_all.reset_index(drop = True, inplace = True)
         data_expand_all.to_csv(workdir + 'Processed_Data/data_expand_' + cohort + '.csv')
-
-
-
-
-
