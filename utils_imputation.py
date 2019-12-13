@@ -22,13 +22,13 @@ from tqdm import tqdm
 tqdm.pandas()
 
 
-print("Currently working on " + list(platform.uname())[1] + " Machine")
-if 'Y710' in list(platform.uname())[1]:
-    workdir = '/media/zhihuan/Drive3/20191109_AKI_python/'
-elif 'Zhi-G7-7790' in list(platform.uname())[1]:
-    workdir = '/home/zhihuan/Documents/20191109_AKI_python/'
-else:
-    workdir = ''
+#print("Currently working on " + list(platform.uname())[1] + " Machine")
+#if 'Y710' in list(platform.uname())[1]:
+#    workdir = '/media/zhihuan/Drive3/20191109_AKI_python/'
+#elif 'Zhi-G7-7790' in list(platform.uname())[1]:
+#    workdir = '/home/zhihuan/Documents/20191109_AKI_python/'
+#else:
+#    workdir = ''
     
 
 def processing(data, series = 6, gap = 6):
