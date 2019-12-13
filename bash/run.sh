@@ -1,0 +1,1 @@
+python 2_machine_learning.py --no_input_output --series 12 --gap 24; python 2_machine_learning.py --no_SCr --series 12 --gap 24; python 2_machine_learning.py --no_input_output --no_SCr --series 12 --gap 24

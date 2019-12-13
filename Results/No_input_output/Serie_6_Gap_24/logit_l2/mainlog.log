@@ -1,0 +1,14 @@
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.43273741
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.42414395
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.44207304
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.42712814
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.43324737
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.45556736
+Best hyper-parameter: 3
+Model:
+LogisticRegression(C=3, class_weight={0: 216, 1: 45398}, dual=False,
+          fit_intercept=True, intercept_scaling=1, max_iter=2000,
+          multi_class='warn', n_jobs=None, penalty='l2', random_state=None,
+          solver='sag', tol=0.0001, verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.85597713, test AUC: 0.74659545, train F1: 0.47685447, test F1: 0.47049223, test Precision: 0.50701827, test Recall: 0.73287632
+[EICU] test AUC: 0.58295515, test F1: 0.46988128, test Precision: 0.50518850, test Recall: 0.57937909

@@ -1,0 +1,13 @@
+,0
+auc_train,1.0
+auc_test,0.8113705394123474
+f1_train,1.0
+f1_test,0.4987746736176091
+precision_test,0.4975553382522891
+recall_test,0.5
+sensitivity,0.0
+specificity,1.0
+ppv,
+npv,0.9951106765045782
+hitrate,0.9951106765045782
+MCC,0.0

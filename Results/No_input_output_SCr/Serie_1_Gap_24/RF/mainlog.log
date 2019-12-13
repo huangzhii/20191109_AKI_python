@@ -1,0 +1,16 @@
+Current model: RF, current hyper-parameter: 16, current F1 score: 0.49786133
+Current model: RF, current hyper-parameter: 32, current F1 score: 0.49786133
+Current model: RF, current hyper-parameter: 64, current F1 score: 0.49786133
+Current model: RF, current hyper-parameter: 128, current F1 score: 0.49786133
+Current model: RF, current hyper-parameter: 256, current F1 score: 0.49786133
+Best hyper-parameter: 16
+Model:
+RandomForestClassifier(bootstrap=True, class_weight={0: 255, 1: 46746},
+            criterion='gini', max_depth=None, max_features='auto',
+            max_leaf_nodes=None, min_impurity_decrease=0.0,
+            min_impurity_split=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            n_estimators=16, n_jobs=None, oob_score=False,
+            random_state=None, verbose=0, warm_start=False)
+[MIMIC] train AUC: 1.00000000, test AUC: 0.69973830, train F1: 0.96110996, test F1: 0.51626427, test Precision: 0.59818841, test Recall: 0.50929414
+[EICU] test AUC: 0.52018700, test F1: 0.49776620, test Precision: 0.49555226, test Recall: 0.50000000

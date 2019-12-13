@@ -1,0 +1,18 @@
+Current model: GBM, current hyper-parameter: 16, current F1 score: 0.48075674
+Current model: GBM, current hyper-parameter: 32, current F1 score: 0.47545045
+Current model: GBM, current hyper-parameter: 64, current F1 score: 0.47150122
+Current model: GBM, current hyper-parameter: 128, current F1 score: 0.47837542
+Current model: GBM, current hyper-parameter: 256, current F1 score: 0.47958542
+Best hyper-parameter: 16
+Model:
+GradientBoostingClassifier(criterion='friedman_mse', init=None,
+              learning_rate=0.1, loss='deviance', max_depth=3,
+              max_features=None, max_leaf_nodes=None,
+              min_impurity_decrease=0.0, min_impurity_split=None,
+              min_samples_leaf=1, min_samples_split=2,
+              min_weight_fraction_leaf=0.0, n_estimators=16,
+              n_iter_no_change=None, presort='auto', random_state=None,
+              subsample=1.0, tol=0.0001, validation_fraction=0.1,
+              verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.88886170, test AUC: 0.80249503, train F1: 0.69248688, test F1: 0.49187252, test Precision: 0.50171260, test Recall: 0.51867225
+[EICU] test AUC: 0.55385899, test F1: 0.48364025, test Precision: 0.50017078, test Recall: 0.50160613

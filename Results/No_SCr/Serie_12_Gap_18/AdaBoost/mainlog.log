@@ -1,0 +1,11 @@
+Current model: AdaBoost, current hyper-parameter: 16, current F1 score: 0.49801714
+Current model: AdaBoost, current hyper-parameter: 32, current F1 score: 0.52445945
+Current model: AdaBoost, current hyper-parameter: 64, current F1 score: 0.51058609
+Current model: AdaBoost, current hyper-parameter: 128, current F1 score: 0.54028692
+Current model: AdaBoost, current hyper-parameter: 256, current F1 score: 0.53595743
+Best hyper-parameter: 128
+Model:
+AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=1.0, n_estimators=128, random_state=None)
+[MIMIC] train AUC: 0.99791721, test AUC: 0.86370788, train F1: 0.69429425, test F1: 0.52628761, test Precision: 0.52069383, test Recall: 0.53703391
+[EICU] test AUC: 0.50678604, test F1: 0.48969472, test Precision: 0.49375000, test Recall: 0.48570550
