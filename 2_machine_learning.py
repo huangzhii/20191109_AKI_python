@@ -80,6 +80,8 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--series', default=6, type=int)
     parser.add_argument('--gap', default=12, type=int)
+    parser.add_argument('--no_input_output', default=False, action='store_true')
+    parser.add_argument('--no_SCr', default=False, action='store_true')
     parser.add_argument('--result_dir', default=workdir+'Results/', type=str)
     return parser.parse_args()
 
@@ -92,6 +94,14 @@ if __name__ == '__main__':
     gap = args.gap
     data_expand_MIMIC = pd.read_csv(workdir+'Processed_Data/data_expand_MIMIC.csv', index_col = 0)
     data_expand_EICU = pd.read_csv(workdir+'Processed_Data/data_expand_EICU.csv', index_col = 0)
+    if args.no_input_output:
+        print('Remove input output feature ...')
+        data_expand_MIMIC = data_expand_MIMIC[[col for col in data_expand_MIMIC.columns if 'INPUT' not in col and 'OUTPUT' not in col]]
+        data_expand_EICU = data_expand_EICU[[col for col in data_expand_MIMIC.columns if 'INPUT' not in col and 'OUTPUT' not in col]]
+    if args.no_SCr:
+        data_expand_MIMIC = data_expand_MIMIC[[col for col in data_expand_MIMIC.columns if 'CR' not in col]]
+        data_expand_EICU = data_expand_EICU[[col for col in data_expand_MIMIC.columns if 'CR' not in col]]
+        print('Remove SCr feature ...')
 # =============================================================================
 #     Data normalization
 # =============================================================================
@@ -203,7 +213,14 @@ if __name__ == '__main__':
                     
     
             TIMESTRING  = time.strftime("%Y%m%d-%H.%M.%S", time.localtime())
-            results_dir_dataset = args.result_dir + '/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
+            if args.no_input_output and not args.no_SCr :
+                results_dir_dataset = args.result_dir + '/No_input_output/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
+            elif args.no_SCr and not args.no_input_output :
+                results_dir_dataset = args.result_dir + '/No_SCr/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
+            elif args.no_input_output and args.no_SCr:
+                results_dir_dataset = args.result_dir + '/No_input_output_SCr/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
+            else:
+                results_dir_dataset = args.result_dir + '/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
             if not os.path.exists(results_dir_dataset):
                 os.makedirs(results_dir_dataset)
     
@@ -292,6 +309,9 @@ if __name__ == '__main__':
                 pickle.dump(y_pred_proba, handle, protocol=pickle.HIGHEST_PROTOCOL)
             with open(results_dir_dataset + 'outputs_test_bin_MIMIC.pickle', 'wb') as handle:
                 pickle.dump(y_pred, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            with open(results_dir_dataset + 'column_names.pickle', 'wb') as handle:
+                pickle.dump(dataset['MIMIC']['column names'], handle, protocol=pickle.HIGHEST_PROTOCOL)
+            
                 
             res_table = pd.DataFrame([auc_train, auc_test, f1_train, f1_test, precision_test, recall_test, \
                                       sensitivity, specificity, ppv, npv, hitrate, mcc])
