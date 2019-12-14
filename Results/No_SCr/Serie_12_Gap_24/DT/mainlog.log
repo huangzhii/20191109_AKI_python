@@ -1,20 +1,20 @@
-Current model: DT, current hyper-parameter: 1, current F1 score: 0.38634585
-Current model: DT, current hyper-parameter: 2, current F1 score: 0.38634585
-Current model: DT, current hyper-parameter: 3, current F1 score: 0.44867994
-Current model: DT, current hyper-parameter: 4, current F1 score: 0.44615097
-Current model: DT, current hyper-parameter: 5, current F1 score: 0.45931340
-Current model: DT, current hyper-parameter: 6, current F1 score: 0.46672291
-Current model: DT, current hyper-parameter: 7, current F1 score: 0.47629727
-Current model: DT, current hyper-parameter: 8, current F1 score: 0.48032968
-Current model: DT, current hyper-parameter: 9, current F1 score: 0.48193821
-Current model: DT, current hyper-parameter: 10, current F1 score: 0.48245799
-Best hyper-parameter: 10
+Current model: DT, current hyper-parameter: 1, current F1 score: 0.39889912
+Current model: DT, current hyper-parameter: 2, current F1 score: 0.39889912
+Current model: DT, current hyper-parameter: 3, current F1 score: 0.44960139
+Current model: DT, current hyper-parameter: 4, current F1 score: 0.45775255
+Current model: DT, current hyper-parameter: 5, current F1 score: 0.46036014
+Current model: DT, current hyper-parameter: 6, current F1 score: 0.48290851
+Current model: DT, current hyper-parameter: 7, current F1 score: 0.48440483
+Current model: DT, current hyper-parameter: 8, current F1 score: 0.48864160
+Current model: DT, current hyper-parameter: 9, current F1 score: 0.48833482
+Current model: DT, current hyper-parameter: 10, current F1 score: 0.48823864
+Best hyper-parameter: 8
 Model:
 DecisionTreeClassifier(class_weight={0: 171, 1: 43439}, criterion='gini',
-            max_depth=10, max_features=None, max_leaf_nodes=None,
+            max_depth=8, max_features=None, max_leaf_nodes=None,
             min_impurity_decrease=0.0, min_impurity_split=None,
             min_samples_leaf=1, min_samples_split=2,
             min_weight_fraction_leaf=0.0, presort=False, random_state=None,
             splitter='best')
-[MIMIC] train AUC: 0.97199223, test AUC: 0.63935730, train F1: 0.52739172, test F1: 0.48195354, test Precision: 0.50466096, test Recall: 0.63286323
-[EICU] test AUC: 0.51165962, test F1: 0.49349193, test Precision: 0.50222708, test Recall: 0.51281360
+[MIMIC] train AUC: 0.96411316, test AUC: 0.66987834, train F1: 0.51020375, test F1: 0.47761471, test Precision: 0.50499716, test Recall: 0.66174777
+[EICU] test AUC: 0.51197934, test F1: 0.49363499, test Precision: 0.50226622, test Recall: 0.51297845

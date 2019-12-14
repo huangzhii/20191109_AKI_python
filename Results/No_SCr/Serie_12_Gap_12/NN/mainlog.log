@@ -1,15 +1,15 @@
-Current model: NN, current hyper-parameter: 16, current F1 score: 0.52529133
-Current model: NN, current hyper-parameter: 32, current F1 score: 0.54141708
-Current model: NN, current hyper-parameter: 64, current F1 score: 0.54791343
-Current model: NN, current hyper-parameter: 128, current F1 score: 0.53452933
-Best hyper-parameter: 64
+Current model: NN, current hyper-parameter: 16, current F1 score: 0.52942946
+Current model: NN, current hyper-parameter: 32, current F1 score: 0.52049523
+Current model: NN, current hyper-parameter: 64, current F1 score: 0.53360688
+Current model: NN, current hyper-parameter: 128, current F1 score: 0.53380142
+Best hyper-parameter: 128
 Model:
 MLPClassifier(activation='relu', alpha=0, batch_size='auto', beta_1=0.9,
        beta_2=0.999, early_stopping=False, epsilon=1e-08,
-       hidden_layer_sizes=64, learning_rate='constant',
+       hidden_layer_sizes=128, learning_rate='constant',
        learning_rate_init=0.001, max_iter=2000, momentum=0.9,
        n_iter_no_change=10, nesterovs_momentum=True, power_t=0.5,
        random_state=1, shuffle=True, solver='adam', tol=0.0001,
        validation_fraction=0.1, verbose=False, warm_start=False)
-[MIMIC] train AUC: 1.00000000, test AUC: 0.75170302, train F1: 1.00000000, test F1: 0.49232862, test Precision: 0.50365710, test Recall: 0.54787142
-[EICU] test AUC: 0.54821857, test F1: 0.47037349, test Precision: 0.49712122, test Recall: 0.47355601
+[MIMIC] train AUC: 1.00000000, test AUC: 0.74980753, train F1: 1.00000000, test F1: 0.49023113, test Precision: 0.50365518, test Recall: 0.55298699
+[EICU] test AUC: 0.59914354, test F1: 0.47458482, test Precision: 0.49759831, test Recall: 0.47988695

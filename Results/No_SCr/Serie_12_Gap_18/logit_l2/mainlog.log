@@ -1,14 +1,14 @@
-Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.47033856
-Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.47558803
-Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.48127648
-Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.48190304
-Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.48090445
-Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.48099740
-Best hyper-parameter: 2
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.48940751
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.50258734
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.49588949
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.48747832
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.49331919
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.50652586
+Best hyper-parameter: 3
 Model:
-LogisticRegression(C=2, class_weight={0: 215, 1: 44947}, dual=False,
+LogisticRegression(C=3, class_weight={0: 215, 1: 44947}, dual=False,
           fit_intercept=True, intercept_scaling=1, max_iter=2000,
           multi_class='warn', n_jobs=None, penalty='l2', random_state=None,
           solver='sag', tol=0.0001, verbose=0, warm_start=False)
-[MIMIC] train AUC: 0.88367814, test AUC: 0.72456423, train F1: 0.50712910, test F1: 0.48823915, test Precision: 0.50909289, test Recall: 0.71719788
-[EICU] test AUC: 0.41792192, test F1: 0.32694906, test Precision: 0.49629202, test Recall: 0.42297495
+[MIMIC] train AUC: 0.86652487, test AUC: 0.64713120, train F1: 0.49987540, test F1: 0.46446839, test Precision: 0.50458814, test Recall: 0.64936427
+[EICU] test AUC: 0.51428681, test F1: 0.37617472, test Precision: 0.50119237, test Recall: 0.52431217

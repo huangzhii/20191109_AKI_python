@@ -1,1 +1,15 @@
 Current model: NN, current hyper-parameter: 16, current F1 score: 0.47321583
+Current model: NN, current hyper-parameter: 32, current F1 score: 0.48609794
+Current model: NN, current hyper-parameter: 64, current F1 score: 0.47123798
+Current model: NN, current hyper-parameter: 128, current F1 score: 0.48038917
+Best hyper-parameter: 32
+Model:
+MLPClassifier(activation='relu', alpha=0, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=32, learning_rate='constant',
+       learning_rate_init=0.001, max_iter=2000, momentum=0.9,
+       n_iter_no_change=10, nesterovs_momentum=True, power_t=0.5,
+       random_state=1, shuffle=True, solver='adam', tol=0.0001,
+       validation_fraction=0.1, verbose=False, warm_start=False)
+[MIMIC] train AUC: 1.00000000, test AUC: 0.80548383, train F1: 1.00000000, test F1: 0.51283097, test Precision: 0.51153691, test Recall: 0.59686869
+[EICU] test AUC: 0.53960533, test F1: 0.49250343, test Precision: 0.50245643, test Recall: 0.51922907

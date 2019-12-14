@@ -10,3 +10,5 @@ LogisticRegression(C=3, class_weight={0: 215, 1: 44947}, dual=False,
           fit_intercept=True, intercept_scaling=1, max_iter=2000,
           multi_class='warn', n_jobs=None, penalty='l1', random_state=None,
           solver='saga', tol=0.0001, verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.92518785, test AUC: 0.69848244, train F1: 0.50995495, test F1: 0.48226366, test Precision: 0.50745126, test Recall: 0.69143129
+[EICU] test AUC: 0.51311866, test F1: 0.41357641, test Precision: 0.50067663, test Recall: 0.51238088

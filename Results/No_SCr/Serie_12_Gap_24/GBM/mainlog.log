@@ -1,18 +1,18 @@
-Current model: GBM, current hyper-parameter: 16, current F1 score: 0.47407359
-Current model: GBM, current hyper-parameter: 32, current F1 score: 0.47309317
-Current model: GBM, current hyper-parameter: 64, current F1 score: 0.47948011
-Current model: GBM, current hyper-parameter: 128, current F1 score: 0.46728074
-Current model: GBM, current hyper-parameter: 256, current F1 score: 0.48022812
-Best hyper-parameter: 256
+Current model: GBM, current hyper-parameter: 16, current F1 score: 0.49326163
+Current model: GBM, current hyper-parameter: 32, current F1 score: 0.49818660
+Current model: GBM, current hyper-parameter: 64, current F1 score: 0.49589409
+Current model: GBM, current hyper-parameter: 128, current F1 score: 0.49750185
+Current model: GBM, current hyper-parameter: 256, current F1 score: 0.49455804
+Best hyper-parameter: 32
 Model:
 GradientBoostingClassifier(criterion='friedman_mse', init=None,
               learning_rate=0.1, loss='deviance', max_depth=3,
               max_features=None, max_leaf_nodes=None,
               min_impurity_decrease=0.0, min_impurity_split=None,
               min_samples_leaf=1, min_samples_split=2,
-              min_weight_fraction_leaf=0.0, n_estimators=256,
+              min_weight_fraction_leaf=0.0, n_estimators=32,
               n_iter_no_change=None, presort='auto', random_state=None,
               subsample=1.0, tol=0.0001, validation_fraction=0.1,
               verbose=0, warm_start=False)
-[MIMIC] train AUC: 0.99070421, test AUC: 0.78612867, train F1: 0.95437304, test F1: 0.52616433, test Precision: 0.51884172, test Recall: 0.54593038
-[EICU] test AUC: 0.53759654, test F1: 0.36782208, test Precision: 0.50028213, test Recall: 0.50653418
+[MIMIC] train AUC: 0.95248157, test AUC: 0.82547515, train F1: 0.80511216, test F1: 0.50568390, test Precision: 0.50447837, test Recall: 0.50903650
+[EICU] test AUC: 0.54672841, test F1: 0.35752812, test Precision: 0.49977870, test Recall: 0.49482960
