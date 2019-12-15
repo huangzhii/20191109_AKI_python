@@ -111,15 +111,6 @@ def crop_reshape(X, y, series, gap):
 
 
 def imputation_on_the_fly(data_expand, series = 6, gap = 6):
-    # Load expanded data
-    if 'PF' in data_expand.columns:
-        print('Remove PF_ratio (so many missing)')
-        data_expand.drop('PF', axis = 1, inplace = True)
-    if 'ETHNICITY' in data_expand.columns:
-        print('Remove ETHNICITY')
-        data_expand.drop('ETHNICITY', axis = 1, inplace = True)
-        
-        
     # =============================================================================
     #       Data interpolation
     # =============================================================================

@@ -104,6 +104,12 @@ if __name__ == '__main__':
         data_expand_MIMIC = data_expand_MIMIC[[col for col in data_expand_MIMIC.columns if 'CR' not in col]]
         data_expand_EICU = data_expand_EICU[[col for col in data_expand_MIMIC.columns if 'CR' not in col]]
         print('Remove SCr feature ...')
+        
+    col_2b_removed = ['ETHNICITY','PF','ALT','AST','TBB']
+    print('Remove features that has so many missing data:', col_2b_removed)
+    data_expand_MIMIC.drop(col_2b_removed, axis = 1, inplace = True)
+    data_expand_EICU.drop(col_2b_removed, axis = 1, inplace = True)
+
 # =============================================================================
 #     Data normalization
 # =============================================================================
@@ -120,6 +126,7 @@ if __name__ == '__main__':
 # =============================================================================
     X_MIMIC, y_MIMIC, columns_MIMIC, ICUSTAY_ID_MIMIC = imputation_on_the_fly(data_expand_MIMIC_scaled, series = series, gap = gap)
     X_EICU, y_EICU, columns_EICU, ICUSTAY_ID_EICU = imputation_on_the_fly(data_expand_EICU_scaled, series = series, gap = gap)
+    
     
 # =============================================================================
 #     Prepare dataset
@@ -225,8 +232,6 @@ if __name__ == '__main__':
                 results_dir_dataset = args.result_dir + 'All_features/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
             if not os.path.exists(results_dir_dataset):
                 os.makedirs(results_dir_dataset)
-            with open(results_dir_dataset + 'column_names.pickle', 'wb') as handle:
-                pickle.dump(dataset['MIMIC']['column names'], handle, protocol=pickle.HIGHEST_PROTOCOL)
     
             # create logger
             logger = logging.getLogger(TIMESTRING)
@@ -313,6 +318,8 @@ if __name__ == '__main__':
                 pickle.dump(y_pred_proba, handle, protocol=pickle.HIGHEST_PROTOCOL)
             with open(results_dir_dataset + 'outputs_test_bin_MIMIC.pickle', 'wb') as handle:
                 pickle.dump(y_pred, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            with open(results_dir_dataset + 'column_names.pickle', 'wb') as handle:
+                pickle.dump(dataset['MIMIC']['column names'], handle, protocol=pickle.HIGHEST_PROTOCOL)
                 
             res_table = pd.DataFrame([auc_train, auc_test, f1_train, f1_test, precision_test, recall_test, \
                                       sensitivity, specificity, ppv, npv, hitrate, mcc])
