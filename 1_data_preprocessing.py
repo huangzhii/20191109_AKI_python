@@ -26,6 +26,8 @@ if 'Y710' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/Drive3/20191109_AKI_python/'
 elif 'Zhi-G7-7790' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/DATA/20191109_AKI_python/'
+elif 'DESKTOP-05QACO1' in list(platform.uname())[1]:
+    workdir = 'D:/20191109_AKI_python/'
 else:
     workdir = ''
     

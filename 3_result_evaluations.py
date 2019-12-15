@@ -34,6 +34,8 @@ if 'Y710' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/Drive3/20191109_AKI_python/'
 elif 'Zhi-G7-7790' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/DATA/20191109_AKI_python/'
+elif 'DESKTOP-05QACO1' in list(platform.uname())[1]:
+    workdir = 'D:/20191109_AKI_python/'
 else:
     workdir = ''
     
@@ -61,7 +63,7 @@ if __name__ == '__main__':
     metrics = ['auc_train', 'auc_test', 'f1_train', 'f1_test', 'precision_test', \
        'recall_test', 'sensitivity', 'specificity', 'ppv', 'npv', 'hitrate', 'MCC']
     methods = [mtd for mtd in os.listdir(args.result_dir + serie_gap_list[0])]
-    methods = ['logit_l1', 'logit_l2']
+#    methods = ['logit_l1', 'logit_l2']
     for c in metrics:
         result[c] = pd.DataFrame(columns = serie_gap_list, index = methods)
     
@@ -74,4 +76,19 @@ if __name__ == '__main__':
     for c in metrics:
         result[c].to_csv(args.result_dir + 'performance_' + c + '.csv')
     
+# =============================================================================
+#     Feature ranking
+# =============================================================================
+    mdl_dir = workdir + 'Results/All_features/Serie_1_Gap_6/logit_l1/'
+    with open(mdl_dir + 'regr_model.pickle', 'rb') as f:
+        model = pickle.load(f)
+    with open(mdl_dir + 'column_names.pickle', 'rb') as f:
+        colnames = pickle.load(f)
     
+    rank = pd.DataFrame(index = colnames, columns = ['coefficient'])
+    rank['coefficient'] = model.coef_.reshape(-1)
+    rank.sort_values(by = 'coefficient', inplace = True, ascending = False)
+    rank.to_csv(mdl_dir + 'feature_ranking.csv')
+
+
+

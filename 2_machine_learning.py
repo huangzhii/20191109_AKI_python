@@ -43,6 +43,8 @@ if 'Y710' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/Drive3/20191109_AKI_python/'
 elif 'Zhi-G7-7790' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/DATA/20191109_AKI_python/'
+elif 'DESKTOP-05QACO1' in list(platform.uname())[1]:
+    workdir = 'D:/20191109_AKI_python/'
 else:
     workdir = ''
 sys.path.append(workdir)
@@ -78,8 +80,8 @@ def get_evaluation_res(tp, fp, tn, fn):
     
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--series', default=6, type=int)
-    parser.add_argument('--gap', default=12, type=int)
+    parser.add_argument('--series', default=1, type=int)
+    parser.add_argument('--gap', default=6, type=int)
     parser.add_argument('--no_input_output', default=False, action='store_true')
     parser.add_argument('--no_SCr', default=False, action='store_true')
     parser.add_argument('--result_dir', default=workdir+'Results/', type=str)
@@ -214,15 +216,17 @@ if __name__ == '__main__':
     
             TIMESTRING  = time.strftime("%Y%m%d-%H.%M.%S", time.localtime())
             if args.no_input_output and not args.no_SCr :
-                results_dir_dataset = args.result_dir + '/No_input_output/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
+                results_dir_dataset = args.result_dir + 'No_input_output/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
             elif args.no_SCr and not args.no_input_output :
-                results_dir_dataset = args.result_dir + '/No_SCr/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
+                results_dir_dataset = args.result_dir + 'No_SCr/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
             elif args.no_input_output and args.no_SCr:
-                results_dir_dataset = args.result_dir + '/No_input_output_SCr/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
+                results_dir_dataset = args.result_dir + 'No_input_output_SCr/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
             else:
-                results_dir_dataset = args.result_dir + '/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
+                results_dir_dataset = args.result_dir + 'All_features/Serie_' + str(args.series) + '_Gap_' + str(args.gap) + '/' + mtd + '/'
             if not os.path.exists(results_dir_dataset):
                 os.makedirs(results_dir_dataset)
+            with open(results_dir_dataset + 'column_names.pickle', 'wb') as handle:
+                pickle.dump(dataset['MIMIC']['column names'], handle, protocol=pickle.HIGHEST_PROTOCOL)
     
             # create logger
             logger = logging.getLogger(TIMESTRING)
@@ -309,9 +313,6 @@ if __name__ == '__main__':
                 pickle.dump(y_pred_proba, handle, protocol=pickle.HIGHEST_PROTOCOL)
             with open(results_dir_dataset + 'outputs_test_bin_MIMIC.pickle', 'wb') as handle:
                 pickle.dump(y_pred, handle, protocol=pickle.HIGHEST_PROTOCOL)
-            with open(results_dir_dataset + 'column_names.pickle', 'wb') as handle:
-                pickle.dump(dataset['MIMIC']['column names'], handle, protocol=pickle.HIGHEST_PROTOCOL)
-            
                 
             res_table = pd.DataFrame([auc_train, auc_test, f1_train, f1_test, precision_test, recall_test, \
                                       sensitivity, specificity, ppv, npv, hitrate, mcc])
