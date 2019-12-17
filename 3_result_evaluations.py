@@ -42,7 +42,7 @@ else:
     
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--result_dir', default=workdir+'Results/No_SCr/', type=str)
+    parser.add_argument('--result_dir', default=workdir+'Results/No_input_output_SCr/', type=str)
     return parser.parse_args()
 
 if __name__ == '__main__':
@@ -63,6 +63,7 @@ if __name__ == '__main__':
     metrics = ['auc_train', 'auc_test', 'f1_train', 'f1_test', 'precision_test', \
        'recall_test', 'sensitivity', 'specificity', 'ppv', 'npv', 'hitrate', 'MCC']
     methods = [mtd for mtd in os.listdir(args.result_dir + serie_gap_list[0])]
+    methods = ['logit_l1', 'logit_l2', 'DT', 'RF', 'AdaBoost', 'GBM', 'NN', 'NN_l2']
 #    methods = ['logit_l1', 'logit_l2']
     for c in metrics:
         result[c] = pd.DataFrame(columns = serie_gap_list, index = methods)
