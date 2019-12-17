@@ -25,6 +25,8 @@ from collections import Counter
 from tqdm import tqdm
 import gc, logging, copy, pickle, math, random, argparse, time
 import matplotlib.pyplot as plt
+from sklearn.tree import export_graphviz
+
 np.warnings.filterwarnings('ignore')
 tqdm.pandas()
 
@@ -80,7 +82,7 @@ if __name__ == '__main__':
 ## =============================================================================
 ##     Feature ranking
 ## =============================================================================
-#    mdl_dir = workdir + 'Results/All_features/Serie_1_Gap_6/logit_l1/'
+#    mdl_dir = workdir + 'Results/All_features/Serie_6_Gap_6/logit_l1/'
 #    with open(mdl_dir + 'regr_model.pickle', 'rb') as f:
 #        model = pickle.load(f)
 #    with open(mdl_dir + 'column_names.pickle', 'rb') as f:
@@ -90,6 +92,18 @@ if __name__ == '__main__':
 #    rank['coefficient'] = model.coef_.reshape(-1)
 #    rank.sort_values(by = 'coefficient', inplace = True, ascending = False)
 #    rank.to_csv(mdl_dir + 'feature_ranking.csv')
+        
+        
+    mdl_dir = workdir + 'Results/All_features/Serie_6_Gap_6/DT/'
+    with open(mdl_dir + 'regr_model.pickle', 'rb') as f:
+        model = pickle.load(f)
+    with open(mdl_dir + 'column_names.pickle', 'rb') as f:
+        colnames = pickle.load(f)
+    
+    rank = pd.DataFrame(index = colnames, columns = ['coefficient'])
+    rank['coefficient'] = np.sum(model.feature_importances_.reshape(len(colnames),-1), 1)
+    rank.sort_values(by = 'coefficient', inplace = True, ascending = False)
+    rank.to_csv(mdl_dir + 'feature_importances_.csv')
 
-
+    export_graphviz(model, out_file = mdl_dir + 'tree.dot', max_depth = 3)
 
