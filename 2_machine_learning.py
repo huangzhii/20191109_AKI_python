@@ -80,7 +80,7 @@ def get_evaluation_res(tp, fp, tn, fn):
     
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--series', default=1, type=int)
+    parser.add_argument('--series', default=6, type=int)
     parser.add_argument('--gap', default=6, type=int)
     parser.add_argument('--no_input_output', default=False, action='store_true')
     parser.add_argument('--no_SCr', default=False, action='store_true')

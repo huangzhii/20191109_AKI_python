@@ -1,0 +1,20 @@
+Current model: DT, current hyper-parameter: 1, current F1 score: 0.30530859
+Current model: DT, current hyper-parameter: 2, current F1 score: 0.39184999
+Current model: DT, current hyper-parameter: 3, current F1 score: 0.46708533
+Current model: DT, current hyper-parameter: 4, current F1 score: 0.44198363
+Current model: DT, current hyper-parameter: 5, current F1 score: 0.43271174
+Current model: DT, current hyper-parameter: 6, current F1 score: 0.44057706
+Current model: DT, current hyper-parameter: 7, current F1 score: 0.45909575
+Current model: DT, current hyper-parameter: 8, current F1 score: 0.46662437
+Current model: DT, current hyper-parameter: 9, current F1 score: 0.47141888
+Current model: DT, current hyper-parameter: 10, current F1 score: 0.47052995
+Best hyper-parameter: 9
+Model:
+DecisionTreeClassifier(class_weight={0: 1116, 1: 87604}, criterion='gini',
+            max_depth=9, max_features=None, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+[MIMIC] train AUC: 0.91662473, test AUC: 0.81739330, train F1: 0.49298269, test F1: 0.46875455, test Precision: 0.51923970, test Recall: 0.79283739
+[EICU] test AUC: 0.57721869, test F1: 0.42661306, test Precision: 0.50332328, test Recall: 0.57164394
