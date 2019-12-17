@@ -42,7 +42,7 @@ else:
     
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--result_dir', default=workdir+'Results/All_features/', type=str)
+    parser.add_argument('--result_dir', default=workdir+'Results/No_SCr/', type=str)
     return parser.parse_args()
 
 if __name__ == '__main__':
@@ -76,19 +76,19 @@ if __name__ == '__main__':
     for c in metrics:
         result[c].to_csv(args.result_dir + 'performance_' + c + '.csv')
     
-# =============================================================================
-#     Feature ranking
-# =============================================================================
-    mdl_dir = workdir + 'Results/All_features/Serie_1_Gap_6/logit_l1/'
-    with open(mdl_dir + 'regr_model.pickle', 'rb') as f:
-        model = pickle.load(f)
-    with open(mdl_dir + 'column_names.pickle', 'rb') as f:
-        colnames = pickle.load(f)
-    
-    rank = pd.DataFrame(index = colnames, columns = ['coefficient'])
-    rank['coefficient'] = model.coef_.reshape(-1)
-    rank.sort_values(by = 'coefficient', inplace = True, ascending = False)
-    rank.to_csv(mdl_dir + 'feature_ranking.csv')
+## =============================================================================
+##     Feature ranking
+## =============================================================================
+#    mdl_dir = workdir + 'Results/All_features/Serie_1_Gap_6/logit_l1/'
+#    with open(mdl_dir + 'regr_model.pickle', 'rb') as f:
+#        model = pickle.load(f)
+#    with open(mdl_dir + 'column_names.pickle', 'rb') as f:
+#        colnames = pickle.load(f)
+#    
+#    rank = pd.DataFrame(index = colnames, columns = ['coefficient'])
+#    rank['coefficient'] = model.coef_.reshape(-1)
+#    rank.sort_values(by = 'coefficient', inplace = True, ascending = False)
+#    rank.to_csv(mdl_dir + 'feature_ranking.csv')
 
 
 
