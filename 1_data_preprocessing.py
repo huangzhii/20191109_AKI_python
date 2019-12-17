@@ -55,13 +55,14 @@ def merge_mech_vaso(x, data, feature_name, cohort):
     startkey, endkey = [k for k in keys if 'start' in k][0], [k for k in keys if 'end' in k][0]
     data_starts = data[startkey].loc[data[startkey].ICUSTAY_ID == icuid,:]
     data_ends = data[endkey].loc[data[endkey].ICUSTAY_ID == icuid,:]
-    if len(data_starts) < 1 and len(data_ends) < 1: return
+    x[feature_name] = 0
+    if len(data_starts) < 1 and len(data_ends) < 1:
+        return x
     if len(data_starts) != len(data_ends) < 1:
         print('Error: start time and end time inconsistent')
         
     data_starts.reset_index(drop = True, inplace = True)
     data_ends.reset_index(drop = True, inplace = True)
-    x[feature_name] = 0
     for i in range(len(data_starts)):
         if cohort == 'MIMIC':
             starttime = pd.to_datetime(data_starts.iloc[i, 1])
@@ -73,15 +74,7 @@ def merge_mech_vaso(x, data, feature_name, cohort):
     return x
 
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', default='MIMIC', type=str)
-    return parser.parse_args()
-
-
 if __name__ == '__main__':
-    args = parse_args()
-    
     datadir = {}
     datadir['MIMIC'] = workdir + 'Dataset/AKI without overt AKI patients/' + 'MIMIC-ICM-11.14/'
     datadir['EICU'] = workdir + 'Dataset/AKI without overt AKI patients/' + 'EICU-ICM-11.14/'
@@ -270,4 +263,6 @@ if __name__ == '__main__':
         data_expand_all = data_expand_all[colnames_we_need]
         
         data_expand_all.reset_index(drop = True, inplace = True)
-        data_expand_all.to_csv(workdir + 'Processed_Data/data_expand_' + cohort + '.csv')
+#        data_expand_all.to_csv(workdir + 'Processed_Data/data_expand_' + cohort + '.csv')
+        with open(workdir + 'Processed_Data/data_expand_' + cohort + '.pkl', 'wb') as f:
+            pickle.dump(data_expand_all, f)

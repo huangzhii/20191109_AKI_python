@@ -94,8 +94,12 @@ if __name__ == '__main__':
     args = parse_args()
     series = args.series
     gap = args.gap
-    data_expand_MIMIC = pd.read_csv(workdir+'Processed_Data/data_expand_MIMIC.csv', index_col = 0)
-    data_expand_EICU = pd.read_csv(workdir+'Processed_Data/data_expand_EICU.csv', index_col = 0)
+    
+    with open(workdir + 'Processed_Data/data_expand_MIMIC.pkl', 'rb') as f:
+        data_expand_MIMIC = pickle.load(f)
+    with open(workdir + 'Processed_Data/data_expand_EICU.pkl', 'rb') as f:
+        data_expand_EICU = pickle.load(f)
+        
     if args.no_input_output:
         print('Remove input output feature ...')
         data_expand_MIMIC = data_expand_MIMIC[[col for col in data_expand_MIMIC.columns if 'INPUT' not in col and 'OUTPUT' not in col]]
@@ -201,7 +205,7 @@ if __name__ == '__main__':
                                      hidden_layer_sizes=(c), random_state=1))
             if mtd == "DT":
                 regr_list = []
-                hyperparam_list = [1,2,3,4,5,6,7,8,9,10]
+                hyperparam_list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
                 for c in hyperparam_list:
                     regr_list.append(DecisionTreeClassifier(max_depth = c, class_weight = class_weight))
             if mtd == "RF":

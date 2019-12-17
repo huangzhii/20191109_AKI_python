@@ -56,14 +56,16 @@ def check_missing(x):
     return series
     
 if __name__ == '__main__':
-    data_expand_MIMIC = pd.read_csv(workdir+'Processed_Data/data_expand_MIMIC.csv', index_col = 0)
-    data_expand_EICU = pd.read_csv(workdir+'Processed_Data/data_expand_EICU.csv', index_col = 0)
-
-#    columns_missing = data_expand_EICU.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: check_missing(x))
-#    columns_missing = data_expand_MIMIC.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: check_missing(x))
-#    
-#    
-#    columns_missing.sum(axis = 0)
+    with open(workdir + 'Processed_Data/data_expand_MIMIC.pkl', 'rb') as f:
+        data_expand_MIMIC = pickle.load(f)
+    with open(workdir + 'Processed_Data/data_expand_EICU.pkl', 'rb') as f:
+        data_expand_EICU = pickle.load(f)
+        
+    columns_missing = data_expand_EICU.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: check_missing(x))
+    columns_missing.sum(axis = 0)
+    
+    columns_missing = data_expand_MIMIC.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: check_missing(x))
+    columns_missing.sum(axis = 0)
     
     
     col_2b_removed = ['ETHNICITY','PF','ALT','AST','TBB']
