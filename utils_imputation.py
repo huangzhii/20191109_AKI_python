@@ -110,14 +110,18 @@ def crop_reshape(X, y, series, gap):
     return X_reshaped, cols2keep_names, ICUSTAY_ID
 
 
-def imputation_on_the_fly(data_expand, series = 6, gap = 6):
+def imputation_on_the_fly(data_expand, series = 6, gap = 6, imputation_limit = 0):
     # =============================================================================
     #       Data interpolation
     # =============================================================================
     print('Now perform data interpolation...')
     def fillNAinterpolation(x):
-        x2 = x.fillna(method='ffill', axis = 0)
-        x2 = x2.fillna(method='bfill', axis = 0)
+        if imputation_limit == 0:
+            x2 = x.fillna(method='ffill', axis = 0)
+            x2 = x2.fillna(method='bfill', axis = 0)
+        if imputation_limit > 0:
+            x2 = x.fillna(method='ffill', axis = 0, limit = imputation_limit)
+            x2 = x2.fillna(method='bfill', axis = 0, limit = imputation_limit)
         return x2
     data_expand_fillNA = data_expand.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: fillNAinterpolation(x))
     

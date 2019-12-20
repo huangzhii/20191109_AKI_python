@@ -38,13 +38,17 @@ elif 'Zhi-G7-7790' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/DATA/20191109_AKI_python/'
 elif 'DESKTOP-05QACO1' in list(platform.uname())[1]:
     workdir = 'D:/20191109_AKI_python/'
+elif 'dl' in list(platform.uname())[1]: # IU deep learning server
+    workdir = '/gpfs/home/z/h/zhihuan/Carbonate/Desktop/20191109_AKI_python/'
+elif 'uits' in list(platform.uname())[1]: # IU deep learning server
+    workdir = '/gpfs/home/z/h/zhihuan/Carbonate/Desktop/20191109_AKI_python/'
 else:
     workdir = ''
     
     
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--result_dir', default=workdir+'Results/No_input_output_SCr/', type=str)
+    parser.add_argument('--result_dir', default=workdir+'Results/All_features/', type=str)
     return parser.parse_args()
 
 if __name__ == '__main__':

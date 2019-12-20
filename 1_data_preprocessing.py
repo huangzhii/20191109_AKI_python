@@ -28,6 +28,10 @@ elif 'Zhi-G7-7790' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/DATA/20191109_AKI_python/'
 elif 'DESKTOP-05QACO1' in list(platform.uname())[1]:
     workdir = 'D:/20191109_AKI_python/'
+elif 'dl' in list(platform.uname())[1]: # IU deep learning server
+    workdir = '/gpfs/home/z/h/zhihuan/Carbonate/Desktop/20191109_AKI_python/'
+elif 'uits' in list(platform.uname())[1]: # IU deep learning server
+    workdir = '/gpfs/home/z/h/zhihuan/Carbonate/Desktop/20191109_AKI_python/'
 else:
     workdir = ''
     
@@ -263,6 +267,8 @@ if __name__ == '__main__':
         data_expand_all = data_expand_all[colnames_we_need]
         
         data_expand_all.reset_index(drop = True, inplace = True)
+        
+        data_expand_all[~np.isfinite(data_expand_all)] = np.nan # e.g., BMI
 #        data_expand_all.to_csv(workdir + 'Processed_Data/data_expand_' + cohort + '.csv')
         with open(workdir + 'Processed_Data/data_expand_' + cohort + '.pkl', 'wb') as f:
             pickle.dump(data_expand_all, f)

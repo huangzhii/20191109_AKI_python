@@ -1,0 +1,5 @@
+Current model: logit_l1, current hyper-parameter: 0.5, current F1 score: 0.31573974; current sensitivity: 0.00000000
+Current model: logit_l1, current hyper-parameter: 1, current F1 score: 0.31573974; current sensitivity: 0.00000000
+Current model: logit_l1, current hyper-parameter: 1.5, current F1 score: 0.31573974; current sensitivity: 0.00000000
+Current model: logit_l1, current hyper-parameter: 2, current F1 score: 0.31573974; current sensitivity: 0.00000000
+Current model: logit_l1, current hyper-parameter: 2.5, current F1 score: 0.31573974; current sensitivity: 0.00000000

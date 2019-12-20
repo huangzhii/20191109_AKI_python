@@ -34,6 +34,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import KFold
 from sklearn.metrics import matthews_corrcoef
+from imblearn.over_sampling import RandomOverSampler
 np.warnings.filterwarnings('ignore')
 tqdm.pandas()
 
@@ -45,6 +46,10 @@ elif 'Zhi-G7-7790' in list(platform.uname())[1]:
     workdir = '/media/zhihuan/DATA/20191109_AKI_python/'
 elif 'DESKTOP-05QACO1' in list(platform.uname())[1]:
     workdir = 'D:/20191109_AKI_python/'
+elif 'dl' in list(platform.uname())[1]: # IU deep learning server
+    workdir = '/gpfs/home/z/h/zhihuan/Carbonate/Desktop/20191109_AKI_python/'
+elif 'uits' in list(platform.uname())[1]: # IU deep learning server
+    workdir = '/gpfs/home/z/h/zhihuan/Carbonate/Desktop/20191109_AKI_python/'
 else:
     workdir = ''
 sys.path.append(workdir)
@@ -68,14 +73,21 @@ def perf_measure(y_actual, y_hat):
     return(TP, FP, TN, FN)
     
 def get_evaluation_res(tp, fp, tn, fn):
-    sensitivity = tp/(tp+fn) # recall
-    specificity = tn/(tn+fp)
-    if (tp+fp) == 0:
-        ppv = np.nan
-    else:
-        ppv = tp/(tp+fp) # precision or positive predictive value (PPV)
-    npv = tn/(tn+fn) # negative predictive value (NPV)
-    hitrate = (tp+tn)/(tp+tn+fp+fn) # accuracy (ACC)
+    if (tp+fn) == 0: sensitivity = np.nan
+    else: sensitivity = tp/(tp+fn) # recall
+    
+    if (tn+fp) == 0: specificity = np.nan
+    else: specificity = tn/(tn+fp)
+    
+    if (tp+fp) == 0: ppv = np.nan
+    else: ppv = tp/(tp+fp) # precision or positive predictive value (PPV)
+    
+    if (tn+fn) == 0: npv = np.nan
+    else: npv = tn/(tn+fn) # negative predictive value (NPV)
+    
+    if (tp+tn+fp+fn) == 0: hitrate = np.nan
+    else: hitrate = (tp+tn)/(tp+tn+fp+fn) # accuracy (ACC)
+    
     return sensitivity, specificity, ppv, npv, hitrate
     
 def parse_args():
@@ -84,6 +96,8 @@ def parse_args():
     parser.add_argument('--gap', default=6, type=int)
     parser.add_argument('--no_input_output', default=False, action='store_true')
     parser.add_argument('--no_SCr', default=False, action='store_true')
+    parser.add_argument('--randomOversampling', default=True, action='store_true')
+    parser.add_argument('--imputation_limit', default=2, type=int, help='if =0, no limit. if >0, imputation must not exeed certain hours')
     parser.add_argument('--result_dir', default=workdir+'Results/', type=str)
     return parser.parse_args()
 
@@ -94,7 +108,15 @@ if __name__ == '__main__':
     args = parse_args()
     series = args.series
     gap = args.gap
+    randomOversampling = args.randomOversampling
     
+    if args.imputation_limit > 0:
+        print('Now performing imputation with limit = %d' % args.imputation_limit)
+        args.result_dir = workdir+'Results_limit='+str(args.imputation_limit)+'/'
+        
+    if not os.path.exists(args.result_dir):
+        os.makedirs(args.result_dir)
+        
     with open(workdir + 'Processed_Data/data_expand_MIMIC.pkl', 'rb') as f:
         data_expand_MIMIC = pickle.load(f)
     with open(workdir + 'Processed_Data/data_expand_EICU.pkl', 'rb') as f:
@@ -113,25 +135,35 @@ if __name__ == '__main__':
     print('Remove features that has so many missing data:', col_2b_removed)
     data_expand_MIMIC.drop(col_2b_removed, axis = 1, inplace = True)
     data_expand_EICU.drop(col_2b_removed, axis = 1, inplace = True)
-
+    
 # =============================================================================
 #     Data normalization
 # =============================================================================
-    print('Performs normalization from: MIMIC; to: MIMIC and EICU')
-    scaler = StandardScaler().fit(data_expand_MIMIC)
-    data_expand_MIMIC_scaled = pd.DataFrame(scaler.transform(data_expand_MIMIC))
-    data_expand_EICU_scaled = pd.DataFrame(scaler.transform(data_expand_EICU))
-    data_expand_MIMIC_scaled.columns, data_expand_MIMIC_scaled.index = data_expand_MIMIC.columns, data_expand_MIMIC.index
-    data_expand_EICU_scaled.columns, data_expand_EICU_scaled.index = data_expand_EICU.columns, data_expand_EICU.index
-    data_expand_MIMIC_scaled['ICUSTAY_ID'], data_expand_EICU_scaled['ICUSTAY_ID'] = data_expand_MIMIC['ICUSTAY_ID'], data_expand_EICU['ICUSTAY_ID']
-    data_expand_MIMIC_scaled['AKI'], data_expand_EICU_scaled['AKI'] = data_expand_MIMIC['AKI'], data_expand_EICU['AKI']
+    if randomOversampling:
+        print('Performs normalization from: MIMIC; to: MIMIC and EICU')
+        scaler = StandardScaler().fit(data_expand_MIMIC)
+        data_expand_MIMIC_scaled = pd.DataFrame(scaler.transform(data_expand_MIMIC))
+        data_expand_EICU_scaled = pd.DataFrame(scaler.transform(data_expand_EICU))
+        data_expand_MIMIC_scaled.columns, data_expand_MIMIC_scaled.index = data_expand_MIMIC.columns, data_expand_MIMIC.index
+        data_expand_EICU_scaled.columns, data_expand_EICU_scaled.index = data_expand_EICU.columns, data_expand_EICU.index
+        data_expand_MIMIC_scaled['ICUSTAY_ID'], data_expand_EICU_scaled['ICUSTAY_ID'] = data_expand_MIMIC['ICUSTAY_ID'], data_expand_EICU['ICUSTAY_ID']
+        data_expand_MIMIC_scaled['AKI'], data_expand_EICU_scaled['AKI'] = data_expand_MIMIC['AKI'], data_expand_EICU['AKI']
 # =============================================================================
 #     Imputation on-the-fly
 # =============================================================================
-    X_MIMIC, y_MIMIC, columns_MIMIC, ICUSTAY_ID_MIMIC = imputation_on_the_fly(data_expand_MIMIC_scaled, series = series, gap = gap)
-    X_EICU, y_EICU, columns_EICU, ICUSTAY_ID_EICU = imputation_on_the_fly(data_expand_EICU_scaled, series = series, gap = gap)
+    X_MIMIC, y_MIMIC, columns_MIMIC, ICUSTAY_ID_MIMIC = imputation_on_the_fly(data_expand_MIMIC_scaled, series = series, gap = gap, imputation_limit = args.imputation_limit)
+    X_EICU, y_EICU, columns_EICU, ICUSTAY_ID_EICU = imputation_on_the_fly(data_expand_EICU_scaled, series = series, gap = gap, imputation_limit = args.imputation_limit)
     
-    
+# =============================================================================
+#     Handling the imbalanced dataset
+# =============================================================================
+    print('Handling the imbalanced dataset by RandomOverSampler ...')
+    ros = RandomOverSampler(random_state=0)
+    X_index, y_MIMIC_resampled = ros.fit_resample(np.array(range(len(X_MIMIC))).reshape(len(X_MIMIC), 1), y_MIMIC)    
+    X_index = X_index.reshape(-1)
+    X_MIMIC_resampled = X_MIMIC[X_index,:,:]
+    ICUSTAY_ID_MIMIC = ICUSTAY_ID_MIMIC[X_index]
+    X_MIMIC, y_MIMIC = X_MIMIC_resampled, y_MIMIC_resampled
 # =============================================================================
 #     Prepare dataset
 # =============================================================================
@@ -172,9 +204,11 @@ if __name__ == '__main__':
 # =============================================================================
 #     Machine Learning
 # =============================================================================
-        
-    class_weight = {0:0.5, 1:0.5}
-    class_weight = dict(Counter(1-y_MIMIC))
+    if not randomOversampling:
+        class_weight = {0:0.5, 1:0.5}
+    if randomOversampling:
+        class_count = dict(Counter(y_MIMIC))
+        class_weight = {0: 1/class_count[0], 1: 1/class_count[1]}
     
     for i in range(1, nfolds+1):
         print("%d fold CV -- %d/%d" % (nfolds, i, nfolds))
@@ -185,12 +219,12 @@ if __name__ == '__main__':
                 regr_list = []
                 hyperparam_list = [0.5, 1, 1.5, 2, 2.5, 3]
                 for c in hyperparam_list:
-                    regr_list.append(LogisticRegression(penalty='l1', C=c, solver='saga',class_weight = class_weight,max_iter=2000))
+                    regr_list.append(LogisticRegression(penalty='l1', n_jobs = -1, C=c, solver='saga',class_weight = class_weight,max_iter=2000))
             if mtd == "logit_l2": # around 4 mins for all folds
                 regr_list = []
                 hyperparam_list = [0.5, 1, 1.5, 2, 2.5, 3]
                 for c in hyperparam_list:
-                    regr_list.append(LogisticRegression(penalty='l2', C=c, solver='sag',class_weight = class_weight,max_iter=2000))
+                    regr_list.append(LogisticRegression(penalty='l2', n_jobs = -1, C=c, solver='saga',class_weight = class_weight,max_iter=2000))
             if mtd == "NN": # around 2 mins for all folds
                 regr_list = []
                 hyperparam_list = [16, 32, 64, 128]
@@ -217,7 +251,7 @@ if __name__ == '__main__':
                 regr_list = []
                 hyperparam_list = [16, 32, 64, 128, 256]
                 for c in hyperparam_list:
-                    regr_list.append(AdaBoostClassifier(n_estimators = c))
+                    regr_list.append(AdaBoostClassifier(base_estimator = DecisionTreeClassifier(max_depth=1, class_weight = class_weight), n_estimators = c))
             if mtd == "GBM":
                 regr_list = []
                 hyperparam_list = [16, 32, 64, 128, 256]
@@ -261,10 +295,22 @@ if __name__ == '__main__':
             for idx, regr in enumerate(regr_list):
                 regr.fit(X_train_reshaped, y_train)
                 y_pred = regr.predict(X_val_reshaped)
+                y_pred_proba = regr.predict_proba(X_val_reshaped)[:,1]
+                fpr, tpr, thresholds = roc_curve(y_val, y_pred_proba)
+                auc_val = auc(fpr, tpr)
                 f1_val = f1_score(y_pred, y_val, average = 'macro')
+                # P, R test
+                precision_test = precision_score(y_val, y_pred, average = 'macro')
+                recall_test = recall_score(y_val, y_pred, average = 'macro')
+                # other statistics
+                TP, FP, TN, FN = perf_measure(y_val, y_pred)
+                mcc = matthews_corrcoef(y_val, y_pred)
+                sensitivity, specificity, ppv, npv, hitrate = get_evaluation_res(TP, FP, TN, FN)
                 f1_val_list.append(f1_val)
-                print("Current model: %s, current hyper-parameter: %s, current F1 score: %.8f" % (mtd, str(hyperparam_list[idx]), f1_val) )
-                logger.log(logging.INFO, "Current model: %s, current hyper-parameter: %s, current F1 score: %.8f" % (mtd, str(hyperparam_list[idx]), f1_val) )
+                print("Current model: %s, current hyper-parameter: %s, current F1 score: %.8f; current sensitivity: %.8f" % \
+                      (mtd, str(hyperparam_list[idx]), f1_val, sensitivity) )
+                logger.log(logging.INFO, "Current model: %s, current hyper-parameter: %s, current F1 score: %.8f; current sensitivity: %.8f" % \
+                           (mtd, str(hyperparam_list[idx]), f1_val, sensitivity) )
             
             # Choose the optimal regr
             print("Best hyper-parameter: %s" % str(hyperparam_list[np.argmax(f1_val_list)]))
@@ -311,10 +357,10 @@ if __name__ == '__main__':
             mcc = matthews_corrcoef(y_test, y_pred)
             sensitivity, specificity, ppv, npv, hitrate = get_evaluation_res(TP, FP, TN, FN)
             
-            print("[MIMIC] train AUC: %.8f, test AUC: %.8f, train F1: %.8f, test F1: %.8f, test Precision: %.8f, test Recall: %.8f" \
-                  % (auc_train, auc_test, f1_train, f1_test, precision_test, recall_test))
-            logger.log(logging.INFO, "[MIMIC] train AUC: %.8f, test AUC: %.8f, train F1: %.8f, test F1: %.8f, test Precision: %.8f, test Recall: %.8f" \
-                  % (auc_train, auc_test, f1_train, f1_test, precision_test, recall_test))
+            print("[MIMIC] train AUC: %.8f, test AUC: %.8f, train F1: %.8f, test F1: %.8f, test Precision: %.8f, test Recall: %.8f, sensitivity: %.8f, specificity: %.8f, PPV: %.8f, NPV: %.8f" \
+                  % (auc_train, auc_test, f1_train, f1_test, precision_test, recall_test, sensitivity, specificity, ppv, npv))
+            logger.log(logging.INFO, "[MIMIC] train AUC: %.8f, test AUC: %.8f, train F1: %.8f, test F1: %.8f, test Precision: %.8f, test Recall: %.8f, sensitivity: %.8f, specificity: %.8f, PPV: %.8f, NPV: %.8f" \
+                  % (auc_train, auc_test, f1_train, f1_test, precision_test, recall_test, sensitivity, specificity, ppv, npv))
         
             with open(results_dir_dataset + 'regr_model.pickle', 'wb') as handle:
                 pickle.dump(regr, handle, protocol=pickle.HIGHEST_PROTOCOL)
