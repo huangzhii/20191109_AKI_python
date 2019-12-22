@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.66348188; current sensitivity: 0.72472833
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.66348868; current sensitivity: 0.72472833
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.66349916; current sensitivity: 0.72472833
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.66350590; current sensitivity: 0.72472833
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.66314940; current sensitivity: 0.72399232
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.66350644; current sensitivity: 0.72472833
+Best hyper-parameter: 3
+Model:
+LogisticRegression(C=3,
+                   class_weight={0: 4.98773018374798e-06,
+                                 1: 4.98773018374798e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l2', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.74450473, test AUC: 0.74752630, train F1: 0.66719856, test F1: 0.66797119, test Precision: 0.67376235, test Recall: 0.66905795, sensitivity: 0.74807031, specificity: 0.59004558, PPV: 0.65710885, NPV: 0.69041585
+[EICU] test AUC: 0.59588110, test F1: 0.41880780, test Precision: 0.50538640, test Recall: 0.56659901

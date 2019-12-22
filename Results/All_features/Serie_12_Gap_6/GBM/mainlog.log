@@ -1,0 +1,26 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 8, current F1 score: 0.71893041; current sensitivity: 0.88206338
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 16, current F1 score: 0.72934125; current sensitivity: 0.85258393
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 32, current F1 score: 0.74511152; current sensitivity: 0.82825673
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 64, current F1 score: 0.75550630; current sensitivity: 0.79187002
+5 fold CV -- 1/5
+5 fold CV -- 2/5

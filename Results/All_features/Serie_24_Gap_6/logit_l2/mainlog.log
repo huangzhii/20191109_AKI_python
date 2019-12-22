@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.69698916; current sensitivity: 0.72890970
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.69703346; current sensitivity: 0.72890970
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.69701527; current sensitivity: 0.72890970
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.69700270; current sensitivity: 0.72890970
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.69700270; current sensitivity: 0.72890970
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.69699515; current sensitivity: 0.72890970
+Best hyper-parameter: 1
+Model:
+LogisticRegression(C=1,
+                   class_weight={0: 6.26491833678948e-06,
+                                 1: 6.26491833678948e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l2', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.78077307, test AUC: 0.75695169, train F1: 0.70266847, test F1: 0.67645274, test Precision: 0.68060251, test Recall: 0.67738704, sensitivity: 0.74220082, specificity: 0.61257325, PPV: 0.66254757, NPV: 0.69865744
+[EICU] test AUC: 0.59920160, test F1: 0.44469076, test Precision: 0.50529465, test Recall: 0.55408246

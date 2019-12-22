@@ -1,0 +1,35 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: NN, current hyper-parameter: 16, current F1 score: 0.50240271; current sensitivity: 0.20470794
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: NN, current hyper-parameter: 32, current F1 score: 0.48523901; current sensitivity: 0.17976737
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: NN, current hyper-parameter: 64, current F1 score: 0.49783429; current sensitivity: 0.19437060
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: NN, current hyper-parameter: 128, current F1 score: 0.46820512; current sensitivity: 0.15631323
+Best hyper-parameter: 16
+Model:
+MLPClassifier(activation='relu', alpha=0, batch_size='auto', beta_1=0.9,
+              beta_2=0.999, early_stopping=False, epsilon=1e-08,
+              hidden_layer_sizes=16, learning_rate='constant',
+              learning_rate_init=0.001, max_fun=15000, max_iter=2000,
+              momentum=0.9, n_iter_no_change=10, nesterovs_momentum=True,
+              power_t=0.5, random_state=1, shuffle=True, solver='adam',
+              tol=0.0001, validation_fraction=0.1, verbose=False,
+              warm_start=False)
+[MIMIC] train AUC: 1.00000000, test AUC: 0.75870660, train F1: 1.00000000, test F1: 0.54809359, test Precision: 0.70585759, test Recall: 0.60379071, sensitivity: 0.25189179, specificity: 0.95568964, PPV: 0.84998404, NPV: 0.56173113

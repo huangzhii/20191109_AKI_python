@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 0.5, current F1 score: 0.31628339; current sensitivity: 0.40000000
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 1, current F1 score: 0.31628339; current sensitivity: 0.40000000
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 1.5, current F1 score: 0.31628339; current sensitivity: 0.40000000
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 2, current F1 score: 0.31628339; current sensitivity: 0.40000000
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 2.5, current F1 score: 0.31628339; current sensitivity: 0.40000000
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 3, current F1 score: 0.31628339; current sensitivity: 0.40000000
+Best hyper-parameter: 0.5
+Model:
+LogisticRegression(C=0.5,
+                   class_weight={0: 6.26491833678948e-06,
+                                 1: 6.26491833678948e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l1', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.50000000, test AUC: 0.50000000, train F1: 0.33422674, test F1: 0.33059171, test Precision: 0.24692831, test Recall: 0.50000000, sensitivity: 0.00000000, specificity: 1.00000000, PPV: nan, NPV: 0.49385662
+[EICU] test AUC: 0.50000000, test F1: 0.49501020, test Precision: 0.49011900, test Recall: 0.50000000

@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.68652956; current sensitivity: 0.69682464
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.68653413; current sensitivity: 0.69682464
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.68653377; current sensitivity: 0.69682464
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.68652516; current sensitivity: 0.69682464
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.68652891; current sensitivity: 0.69682464
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.68651705; current sensitivity: 0.69682464
+Best hyper-parameter: 1
+Model:
+LogisticRegression(C=1,
+                   class_weight={0: 6.186970240673142e-06,
+                                 1: 6.186970240673142e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l2', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.77270322, test AUC: 0.76312929, train F1: 0.69235335, test F1: 0.68955515, test Precision: 0.68954231, test Recall: 0.68957393, sensitivity: 0.68476825, specificity: 0.69437962, PPV: 0.68187454, NPV: 0.69721009
+[EICU] test AUC: 0.58318881, test F1: 0.36658482, test Precision: 0.50453095, test Recall: 0.56233654

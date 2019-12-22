@@ -1,0 +1,35 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 8, current F1 score: 0.70482784; current sensitivity: 0.73821365
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 16, current F1 score: 0.71391011; current sensitivity: 0.73502450
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 32, current F1 score: 0.72770451; current sensitivity: 0.73810815
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 64, current F1 score: 0.72711638; current sensitivity: 0.70764135
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 128, current F1 score: 0.71847532; current sensitivity: 0.65534361
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5

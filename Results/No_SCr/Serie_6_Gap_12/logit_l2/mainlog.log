@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.65903763; current sensitivity: 0.72654647
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.65903725; current sensitivity: 0.72654647
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.65905474; current sensitivity: 0.72654647
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.65903076; current sensitivity: 0.72654647
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.65904116; current sensitivity: 0.72654647
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.65903797; current sensitivity: 0.72654647
+Best hyper-parameter: 1.5
+Model:
+LogisticRegression(C=1.5,
+                   class_weight={0: 4.98773018374798e-06,
+                                 1: 4.98773018374798e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l2', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.73692776, test AUC: 0.73752466, train F1: 0.66373123, test F1: 0.65463172, test Precision: 0.66032718, test Recall: 0.65587525, sensitivity: 0.73624669, specificity: 0.57550381, PPV: 0.64557572, NPV: 0.67507864
+[EICU] test AUC: 0.59392254, test F1: 0.43373744, test Precision: 0.50465667, test Recall: 0.55343454

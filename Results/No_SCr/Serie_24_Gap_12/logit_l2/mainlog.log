@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.68322620; current sensitivity: 0.69487089
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.68323954; current sensitivity: 0.69487089
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.68323067; current sensitivity: 0.69487089
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.68322105; current sensitivity: 0.69487089
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.68323513; current sensitivity: 0.69487089
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.68323933; current sensitivity: 0.69487089
+Best hyper-parameter: 1
+Model:
+LogisticRegression(C=1,
+                   class_weight={0: 6.947677044180278e-06,
+                                 1: 6.947677044180278e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l2', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.77191610, test AUC: 0.75158509, train F1: 0.68937450, test F1: 0.67143185, test Precision: 0.67140244, test Recall: 0.67149351, sensitivity: 0.67710697, specificity: 0.66588006, PPV: 0.68359451, NPV: 0.65921037
+[EICU] test AUC: 0.58921809, test F1: 0.44444201, test Precision: 0.50382402, test Recall: 0.54252603

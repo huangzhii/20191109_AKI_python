@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.69096997; current sensitivity: 0.68764020
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.69096997; current sensitivity: 0.68764020
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.69096545; current sensitivity: 0.68764020
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.69094691; current sensitivity: 0.68764020
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.69095179; current sensitivity: 0.68764020
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.69097021; current sensitivity: 0.68764020
+Best hyper-parameter: 3
+Model:
+LogisticRegression(C=3,
+                   class_weight={0: 6.861393000006861e-06,
+                                 1: 6.861393000006861e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l2', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.77519669, test AUC: 0.75195381, train F1: 0.69460916, test F1: 0.66795711, test Precision: 0.66930988, test Recall: 0.66785301, sensitivity: 0.62408520, specificity: 0.71162082, PPV: 0.66630184, NPV: 0.67231793
+[EICU] test AUC: 0.57216219, test F1: 0.36310476, test Precision: 0.50358258, test Recall: 0.55633774

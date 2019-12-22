@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.66947126; current sensitivity: 0.73533348
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.66946614; current sensitivity: 0.73533348
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.66948429; current sensitivity: 0.73533348
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.66979289; current sensitivity: 0.73597512
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.66949354; current sensitivity: 0.73533348
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.66978421; current sensitivity: 0.73597512
+Best hyper-parameter: 2
+Model:
+LogisticRegression(C=2,
+                   class_weight={0: 4.514346593474061e-06,
+                                 1: 4.514346593474061e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l2', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.75296392, test AUC: 0.75922912, train F1: 0.67542430, test F1: 0.67574336, test Precision: 0.68227329, test Recall: 0.67692813, sensitivity: 0.75915598, specificity: 0.59470028, PPV: 0.66259476, NPV: 0.70195182
+[EICU] test AUC: 0.58522139, test F1: 0.35743247, test Precision: 0.50413710, test Recall: 0.56239858

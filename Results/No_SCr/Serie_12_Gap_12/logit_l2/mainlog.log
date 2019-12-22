@@ -1,0 +1,47 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 0.5, current F1 score: 0.66907406; current sensitivity: 0.72888283
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1, current F1 score: 0.66868706; current sensitivity: 0.72814242
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 1.5, current F1 score: 0.66908557; current sensitivity: 0.72888283
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2, current F1 score: 0.66907010; current sensitivity: 0.72888283
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 2.5, current F1 score: 0.66907051; current sensitivity: 0.72888283
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l2, current hyper-parameter: 3, current F1 score: 0.66906287; current sensitivity: 0.72888283
+Best hyper-parameter: 1.5
+Model:
+LogisticRegression(C=1.5,
+                   class_weight={0: 5.572023981991218e-06,
+                                 1: 5.572023981991218e-06},
+                   dual=False, fit_intercept=True, intercept_scaling=1,
+                   l1_ratio=None, max_iter=100, multi_class='auto', n_jobs=-1,
+                   penalty='l2', random_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm_start=False)
+[MIMIC] train AUC: 0.74731237, test AUC: 0.73712638, train F1: 0.67707347, test F1: 0.65621383, test Precision: 0.66149430, test Recall: 0.65729314, sensitivity: 0.73489557, specificity: 0.57969071, PPV: 0.64792332, NPV: 0.67506528
+[EICU] test AUC: 0.59286715, test F1: 0.45906539, test Precision: 0.50405575, test Recall: 0.53443832

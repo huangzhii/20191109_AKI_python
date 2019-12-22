@@ -1,0 +1,13 @@
+,0
+auc_train,1.0
+auc_test,
+f1_train,1.0
+f1_test,1.0
+precision_test,1.0
+recall_test,1.0
+sensitivity,
+specificity,1.0
+ppv,
+npv,1.0
+hitrate,1.0
+MCC,0.0
