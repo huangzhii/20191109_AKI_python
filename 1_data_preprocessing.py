@@ -17,6 +17,7 @@ import itertools
 import argparse
 import urllib
 import json
+from scipy.stats import spearmanr
 from tqdm import tqdm
 tqdm.pandas()
 
@@ -83,10 +84,11 @@ if __name__ == '__main__':
     datadir['MIMIC'] = workdir + 'Dataset/AKI without overt AKI patients/' + 'MIMIC-ICM-11.14/'
     datadir['EICU'] = workdir + 'Dataset/AKI without overt AKI patients/' + 'EICU-ICM-11.14/'
     
+    data_expand = {}
     for cohort in datadir.keys():
+        data_expand[cohort] = {}
         print('\nCurrently processing cohort', cohort)
         datagroup = ['bg', 'cohort', 'input', 'lab', 'mechvent', 'output', 'statistic', 'vaso', 'vit']
-        data_expand = {}
         
         
         for group in ['aki', 'non_aki']:
@@ -110,9 +112,9 @@ if __name__ == '__main__':
                 
             if len(data.ICUSTAY_ID.unique()) < len(data): print('Error: ICUSTAY_ID is not unique')
             # expand data
-            data_expand[group] = data.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: expand_data(x, group))
-            data_expand[group].reset_index(drop = True, inplace = True)
-            print('length of '+ group + ' data (expanded):', len(data_expand[group]))
+            data_expand[cohort][group] = data.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: expand_data(x, group))
+            data_expand[cohort][group].reset_index(drop = True, inplace = True)
+            print('length of '+ group + ' data (expanded):', len(data_expand[cohort][group]))
         # =============================================================================
         #      Vit (vital)
         # =============================================================================
@@ -127,7 +129,7 @@ if __name__ == '__main__':
                 data.columns = colnames
                 data['CURR_TIME'] = pd.to_datetime(data['VIT_TIME'], unit = 'h')
             data.drop_duplicates(subset = ['ICUSTAY_ID', 'CURR_TIME'], keep = 'first', inplace = True)
-            data_expand[group] = data_expand[group].merge(data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left')
+            data_expand[cohort][group] = data_expand[cohort][group].merge(data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left')
             
         # =============================================================================
         #      LAB
@@ -143,7 +145,7 @@ if __name__ == '__main__':
                 data.columns = colnames
                 data['CURR_TIME'] = pd.to_datetime(data['LAB_TIME'], unit = 'h')
             data.drop_duplicates(subset = ['ICUSTAY_ID', 'CURR_TIME'], keep = 'first', inplace = True)
-            data_expand[group] = data_expand[group].merge(data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left')
+            data_expand[cohort][group] = data_expand[cohort][group].merge(data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left')
             
         # =============================================================================
         #      Input 6, 12, 24 hr
@@ -161,7 +163,7 @@ if __name__ == '__main__':
                     data.columns = colnames
                     data['CURR_TIME'] = pd.to_datetime(data['INPUT_' + str(h) +'HR_TIME'], unit = 'h')
                 data.drop_duplicates(subset = ['ICUSTAY_ID', 'CURR_TIME'], keep = 'first', inplace = True)
-                data_expand[group] = pd.merge(data_expand[group], data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left', validate = 'm:1')
+                data_expand[cohort][group] = pd.merge(data_expand[cohort][group], data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left', validate = 'm:1')
             
         # =============================================================================
         #      Output 6, 12, 24 hr
@@ -179,7 +181,7 @@ if __name__ == '__main__':
                     data.columns = colnames
                     data['CURR_TIME'] = pd.to_datetime(data['OUTPUT_' + str(h) +'HR_TIME'], unit = 'h')
                 data.drop_duplicates(subset = ['ICUSTAY_ID', 'CURR_TIME'], keep = 'first', inplace = True)
-                data_expand[group] = pd.merge(data_expand[group], data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left', validate = 'm:1')
+                data_expand[cohort][group] = pd.merge(data_expand[cohort][group], data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left', validate = 'm:1')
             
         # =============================================================================
         #      ABG
@@ -195,7 +197,7 @@ if __name__ == '__main__':
                 data.columns = colnames
                 data['CURR_TIME'] = pd.to_datetime(data['ABG_TIME'], unit = 'h')
             data.drop_duplicates(subset = ['ICUSTAY_ID', 'CURR_TIME'], keep = 'first', inplace = True)
-            data_expand[group] = data_expand[group].merge(data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left')
+            data_expand[cohort][group] = data_expand[cohort][group].merge(data, on = ['ICUSTAY_ID', 'CURR_TIME'], how = 'left')
         
         # =============================================================================
         #      mechvent_starttime mechvent_endtime
@@ -211,8 +213,8 @@ if __name__ == '__main__':
                 data[t].columns = colnames
                 
                 
-            data_expand[group] = data_expand[group].groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: merge_mech_vaso(x, data, 'MECH', cohort))
-            data_expand[group].reset_index(drop = True, inplace = True)
+            data_expand[cohort][group] = data_expand[cohort][group].groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: merge_mech_vaso(x, data, 'MECH', cohort))
+            data_expand[cohort][group].reset_index(drop = True, inplace = True)
         # =============================================================================
         #      vaso_starttime vaso_endtime
         # =============================================================================
@@ -231,15 +233,15 @@ if __name__ == '__main__':
                 data['end'] = pd.read_csv(datadir[cohort] + group +'/' + group + '_vaso/eicu_eicu_crd_aki_'+positivity+'_vaso.csv', header=None)
                 data['end'].columns = colnames
                 
-            data_expand[group] = data_expand[group].groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: merge_mech_vaso(x, data, 'VASO', cohort))
-            data_expand[group].reset_index(drop = True, inplace = True)
+            data_expand[cohort][group] = data_expand[cohort][group].groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: merge_mech_vaso(x, data, 'VASO', cohort))
+            data_expand[cohort][group].reset_index(drop = True, inplace = True)
                 
                 
-        data_expand_all = pd.concat((data_expand['aki'], data_expand['non_aki']))
+        data_expand_all = pd.concat((data_expand[cohort]['aki'], data_expand[cohort]['non_aki']))
         
         unique_ID = {}
-        unique_ID['aki'] = data_expand['aki'].ICUSTAY_ID.unique()
-        unique_ID['non_aki'] = data_expand['non_aki'].ICUSTAY_ID.unique()
+        unique_ID['aki'] = data_expand[cohort]['aki'].ICUSTAY_ID.unique()
+        unique_ID['non_aki'] = data_expand[cohort]['non_aki'].ICUSTAY_ID.unique()
         
         print('Unique ICUSTAY_ID: AKI: %d, None-AKI: %d' % (len(unique_ID['aki']), len(unique_ID['non_aki'])))
         
@@ -272,3 +274,59 @@ if __name__ == '__main__':
 #        data_expand_all.to_csv(workdir + 'Processed_Data/data_expand_' + cohort + '.csv')
         with open(workdir + 'Processed_Data/data_expand_' + cohort + '.pkl', 'wb') as f:
             pickle.dump(data_expand_all, f)
+
+
+
+# =============================================================================
+#   Secondary Analysis
+# =============================================================================
+    
+    data_stat = {}
+    for cohort in datadir.keys():
+        data_stat[cohort] = {}
+        print('\nCurrently processing cohort', cohort)        
+        
+        for group in ['aki', 'non_aki']:
+            if group == 'aki': positivity = 'positive'
+            if group == 'non_aki': positivity = 'negative'
+        # =============================================================================
+        #      Cohort
+        # =============================================================================
+            if cohort == 'MIMIC':
+                colnames = pd.read_csv(datadir[cohort] + group +'/' + group + '_statistic/mimic_label.tsv.txt', sep = '\t').columns.values.astype(str)
+                data = pd.read_csv(datadir[cohort] + group +'/' + group + '_statistic/mimic_mimiciii_aki_kidgo_'+positivity+'_stastic5.csv', header=None)
+            elif cohort == 'EICU':
+                colnames = pd.read_csv(datadir[cohort] + group +'/' + group + '_statistic/eicu_label.tsv.txt', sep = '\t').columns.values.astype(str)
+                data = pd.read_csv(datadir[cohort] + group +'/' + group + '_statistic/eicu_eicu_crd_aki_'+positivity+'_statistic6.csv', header=None)
+            data.columns = colnames
+            data = data.loc[data.AGE < 150,:]
+            print('Is ICUSTAY_ID unique?', len(data.ICUSTAY_ID.unique()) == len(data))
+            
+            data_stat[cohort][group] = data
+        
+        data_stat[cohort] = pd.concat((data_stat[cohort]['aki'], data_stat[cohort]['non_aki']))
+        data_expand[cohort]['all'] = pd.concat((data_expand[cohort]['aki'], data_expand[cohort]['non_aki']))
+        idx = np.in1d(data_stat[cohort].ICUSTAY_ID , np.intersect1d(data_stat[cohort].ICUSTAY_ID , data_expand[cohort]['all'].ICUSTAY_ID.unique()))
+        data_stat[cohort] = data_stat[cohort].loc[list(idx),:]
+        if cohort == 'EICU': data_stat[cohort].HOS_DEATH = data_stat[cohort].HOSP_DEATH
+        
+        data_expand_unique = data_expand[cohort]['all'].drop_duplicates(subset = 'ICUSTAY_ID')
+        data_expand_unique.index = data_expand_unique.ICUSTAY_ID
+        
+        AKI = [data_expand_unique.loc[idd,'AKI'] for idd in data_stat[cohort].ICUSTAY_ID.values]
+        
+        HOS_DEATH = data_stat[cohort].HOS_DEATH.values
+        AKI_RRT = data_stat[cohort].AKI_RRT.values
+        LOS = data_stat[cohort].LOS.values
+        ISOFA = data_stat[cohort].ISOFA.values
+    
+        print('cor(HOS_DEATH, AKI):', spearmanr(HOS_DEATH, AKI))
+        print('cor(AKI_RRT, AKI):', spearmanr(AKI_RRT, AKI))
+        print('cor(LOS, AKI):', spearmanr(LOS, AKI))
+        print('cor(ISOFA, AKI):', spearmanr(ISOFA, AKI))
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,50 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 8, current F1 score: 0.33875584; current sensitivity: 0.00811163
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 16, current F1 score: 0.33766000; current sensitivity: 0.00705703
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 32, current F1 score: 0.33888922; current sensitivity: 0.00812966
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 64, current F1 score: 0.33619053; current sensitivity: 0.00562329
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 128, current F1 score: 0.33255330; current sensitivity: 0.00235855
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 256, current F1 score: 0.33115679; current sensitivity: 0.00107398
+Best hyper-parameter: 32
+Model:
+RandomForestClassifier(bootstrap=True, ccp_alpha=0.0,
+                       class_weight={0: 6.861393000006861e-06,
+                                     1: 6.861393000006861e-06},
+                       criterion='gini', max_depth=None, max_features='auto',
+                       max_leaf_nodes=None, max_samples=None,
+                       min_impurity_decrease=0.0, min_impurity_split=None,
+                       min_samples_leaf=1, min_samples_split=2,
+                       min_weight_fraction_leaf=0.0, n_estimators=32,
+                       n_jobs=None, oob_score=False, random_state=None,
+                       verbose=0, warm_start=False)
+[MIMIC] train AUC: 1.00000000, test AUC: 0.68165763, train F1: 1.00000000, test F1: 0.34208421, test Precision: 0.26001831, test Recall: 0.49984236, sensitivity: 0.00000000, specificity: 0.99968472, PPV: 0.00000000, NPV: 0.52003663
+[EICU] test AUC: 0.51679863, test F1: 0.49593852, test Precision: 0.49194250, test Recall: 0.50000000

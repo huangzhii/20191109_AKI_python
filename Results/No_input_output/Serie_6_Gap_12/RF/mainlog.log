@@ -1,0 +1,48 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 8, current F1 score: 0.34586078; current sensitivity: 0.01111822
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 16, current F1 score: 0.34049689; current sensitivity: 0.00602707
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 32, current F1 score: 0.33870361; current sensitivity: 0.00429425
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 64, current F1 score: 0.33727395; current sensitivity: 0.00300765
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 128, current F1 score: 0.33671654; current sensitivity: 0.00246965
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: RF, current hyper-parameter: 256, current F1 score: 0.33656009; current sensitivity: 0.00230688
+Best hyper-parameter: 8
+Model:
+RandomForestClassifier(bootstrap=True, ccp_alpha=0.0, class_weight=None,
+                       criterion='gini', max_depth=None, max_features='auto',
+                       max_leaf_nodes=None, max_samples=None,
+                       min_impurity_decrease=0.0, min_impurity_split=None,
+                       min_samples_leaf=1, min_samples_split=2,
+                       min_weight_fraction_leaf=0.0, n_estimators=8,
+                       n_jobs=None, oob_score=False, random_state=None,
+                       verbose=0, warm_start=False)
+[MIMIC] train AUC: 1.00000000, test AUC: 0.63857418, train F1: 1.00000000, test F1: 0.33701656, test Precision: 0.66644516, test Recall: 0.50335436, sensitivity: 0.00833830, specificity: 0.99837042, PPV: 0.84271845, NPV: 0.49017187
+[EICU] test AUC: 0.54140069, test F1: 0.49622791, test Precision: 0.54332589, test Recall: 0.50040752

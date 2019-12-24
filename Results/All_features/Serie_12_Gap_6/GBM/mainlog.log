@@ -24,3 +24,27 @@ Current model: GBM, current hyper-parameter: 32, current F1 score: 0.74511152; c
 Current model: GBM, current hyper-parameter: 64, current F1 score: 0.75550630; current sensitivity: 0.79187002
 5 fold CV -- 1/5
 5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 128, current F1 score: 0.75195405; current sensitivity: 0.73978236
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 256, current F1 score: 0.73299398; current sensitivity: 0.65284723
+Best hyper-parameter: 64
+Model:
+GradientBoostingClassifier(ccp_alpha=0.0, criterion='friedman_mse', init=None,
+                           learning_rate=0.1, loss='deviance', max_depth=3,
+                           max_features=None, max_leaf_nodes=None,
+                           min_impurity_decrease=0.0, min_impurity_split=None,
+                           min_samples_leaf=1, min_samples_split=2,
+                           min_weight_fraction_leaf=0.0, n_estimators=64,
+                           n_iter_no_change=None, presort='deprecated',
+                           random_state=None, subsample=1.0, tol=0.0001,
+                           validation_fraction=0.1, verbose=0,
+                           warm_start=False)
+[MIMIC] train AUC: 0.89756116, test AUC: 0.84719200, train F1: 0.81320135, test F1: 0.76394595, test Precision: 0.76637350, test Recall: 0.76379760, sensitivity: 0.80799372, specificity: 0.71960149, PPV: 0.75163064, NPV: 0.78111636
+[EICU] test AUC: 0.65222538, test F1: 0.38110740, test Precision: 0.50783392, test Recall: 0.60614878

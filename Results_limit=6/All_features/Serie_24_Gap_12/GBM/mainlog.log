@@ -1,0 +1,49 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 8, current F1 score: 0.72965121; current sensitivity: 0.72683044
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 16, current F1 score: 0.70314368; current sensitivity: 0.63887793
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 32, current F1 score: 0.67276333; current sensitivity: 0.52554743
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 64, current F1 score: 0.58055925; current sensitivity: 0.34699935
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 128, current F1 score: 0.43093726; current sensitivity: 0.09911636
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: GBM, current hyper-parameter: 256, current F1 score: 0.38842226; current sensitivity: 0.05325075
+Best hyper-parameter: 8
+Model:
+GradientBoostingClassifier(ccp_alpha=0.0, criterion='friedman_mse', init=None,
+                           learning_rate=0.1, loss='deviance', max_depth=3,
+                           max_features=None, max_leaf_nodes=None,
+                           min_impurity_decrease=0.0, min_impurity_split=None,
+                           min_samples_leaf=1, min_samples_split=2,
+                           min_weight_fraction_leaf=0.0, n_estimators=8,
+                           n_iter_no_change=None, presort='deprecated',
+                           random_state=None, subsample=1.0, tol=0.0001,
+                           validation_fraction=0.1, verbose=0,
+                           warm_start=False)
+[MIMIC] train AUC: 0.95518842, test AUC: 0.82786786, train F1: 0.86116430, test F1: 0.73138695, test Precision: 0.73183702, test Recall: 0.73197529, sensitivity: 0.71397919, specificity: 0.74997139, PPV: 0.75282805, NPV: 0.71084599

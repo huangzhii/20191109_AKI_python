@@ -1,0 +1,11 @@
+,0
+auc_test,0.5167986293627496
+f1_test,0.4959385247779443
+precision_test,0.49194250022724617
+recall_test,0.5
+sensitivity,0.0
+specificity,1.0
+ppv,
+npv,0.9838850004544923
+hitrate,0.9838850004544923
+MCC,0.0

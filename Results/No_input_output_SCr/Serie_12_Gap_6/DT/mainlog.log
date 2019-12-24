@@ -1,0 +1,100 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 1, current F1 score: 0.60306475; current sensitivity: 0.94910339
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 2, current F1 score: 0.67753291; current sensitivity: 0.94839158
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 3, current F1 score: 0.70749415; current sensitivity: 0.81474148
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 4, current F1 score: 0.72529866; current sensitivity: 0.81915321
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 5, current F1 score: 0.71883107; current sensitivity: 0.78976514
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 6, current F1 score: 0.71169443; current sensitivity: 0.75083481
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 7, current F1 score: 0.71121440; current sensitivity: 0.74793464
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 8, current F1 score: 0.70661177; current sensitivity: 0.72207842
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 9, current F1 score: 0.69686387; current sensitivity: 0.68665652
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 10, current F1 score: 0.69009016; current sensitivity: 0.65217169
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 11, current F1 score: 0.67487264; current sensitivity: 0.60711070
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 12, current F1 score: 0.67084674; current sensitivity: 0.58657424
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 13, current F1 score: 0.65637277; current sensitivity: 0.54477981
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 14, current F1 score: 0.64980700; current sensitivity: 0.51680376
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: DT, current hyper-parameter: 15, current F1 score: 0.64193940; current sensitivity: 0.48631554
+Best hyper-parameter: 4
+Model:
+DecisionTreeClassifier(ccp_alpha=0.0, class_weight=None, criterion='gini',
+                       max_depth=4, max_features=None, max_leaf_nodes=None,
+                       min_impurity_decrease=0.0, min_impurity_split=None,
+                       min_samples_leaf=1, min_samples_split=2,
+                       min_weight_fraction_leaf=0.0, presort='deprecated',
+                       random_state=None, splitter='best')
+[MIMIC] train AUC: 0.80585152, test AUC: 0.79238503, train F1: 0.72992945, test F1: 0.72383249, test Precision: 0.72598880, test Recall: 0.72384515, sensitivity: 0.76871794, specificity: 0.67897236, PPV: 0.71489065, NPV: 0.73708695
+[EICU] test AUC: 0.67240249, test F1: 0.45184279, test Precision: 0.51121470, test Recall: 0.62267293

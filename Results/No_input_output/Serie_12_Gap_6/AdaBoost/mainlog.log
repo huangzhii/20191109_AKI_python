@@ -1,0 +1,56 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 8, current F1 score: 0.71933864; current sensitivity: 0.83149508
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 16, current F1 score: 0.72107046; current sensitivity: 0.78264075
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 32, current F1 score: 0.71783130; current sensitivity: 0.74694139
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 64, current F1 score: 0.71716084; current sensitivity: 0.72372470
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 128, current F1 score: 0.71424212; current sensitivity: 0.69391633
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: AdaBoost, current hyper-parameter: 256, current F1 score: 0.69809787; current sensitivity: 0.63660221
+Best hyper-parameter: 16
+Model:
+AdaBoostClassifier(algorithm='SAMME.R',
+                   base_estimator=DecisionTreeClassifier(ccp_alpha=0.0,
+                                                         class_weight=None,
+                                                         criterion='gini',
+                                                         max_depth=1,
+                                                         max_features=None,
+                                                         max_leaf_nodes=None,
+                                                         min_impurity_decrease=0.0,
+                                                         min_impurity_split=None,
+                                                         min_samples_leaf=1,
+                                                         min_samples_split=2,
+                                                         min_weight_fraction_leaf=0.0,
+                                                         presort='deprecated',
+                                                         random_state=None,
+                                                         splitter='best'),
+                   learning_rate=1.0, n_estimators=16, random_state=None)
+[MIMIC] train AUC: 0.82510182, test AUC: 0.80750426, train F1: 0.73623454, test F1: 0.73533590, test Precision: 0.74062259, test Recall: 0.73566337, sensitivity: 0.80291648, specificity: 0.66841025, PPV: 0.71715889, NPV: 0.76408629
+[EICU] test AUC: 0.66180764, test F1: 0.43458481, test Precision: 0.50882523, test Recall: 0.60423537

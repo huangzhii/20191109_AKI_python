@@ -1,0 +1,45 @@
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 0.5, current F1 score: 0.69428785; current sensitivity: 0.73194409
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 1, current F1 score: 0.69395035; current sensitivity: 0.73127447
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 1.5, current F1 score: 0.69397719; current sensitivity: 0.73127447
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 2, current F1 score: 0.69398490; current sensitivity: 0.73127447
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 2.5, current F1 score: 0.69398081; current sensitivity: 0.73127447
+5 fold CV -- 1/5
+5 fold CV -- 2/5
+5 fold CV -- 3/5
+5 fold CV -- 4/5
+5 fold CV -- 5/5
+Current model: logit_l1, current hyper-parameter: 3, current F1 score: 0.69398415; current sensitivity: 0.73127447
+Best hyper-parameter: 0.5
+Model:
+LogisticRegression(C=0.5, class_weight=None, dual=False, fit_intercept=True,
+                   intercept_scaling=1, l1_ratio=None, max_iter=100,
+                   multi_class='auto', n_jobs=-1, penalty='l1',
+                   random_state=None, solver='saga', tol=0.0001, verbose=0,
+                   warm_start=False)
+[MIMIC] train AUC: 0.79093102, test AUC: 0.76592312, train F1: 0.71415199, test F1: 0.69332247, test Precision: 0.69414082, test Recall: 0.69328340, sensitivity: 0.72399085, specificity: 0.66257595, PPV: 0.69200257, NPV: 0.69627907
+[EICU] test AUC: 0.59319311, test F1: 0.44548067, test Precision: 0.50467644, test Recall: 0.54970881
