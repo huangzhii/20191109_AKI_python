@@ -320,6 +320,11 @@ if __name__ == '__main__':
         LOS = data_stat[cohort].LOS.values
         ISOFA = data_stat[cohort].ISOFA.values
     
+        print('-----------------', cohort, '-----------------')
+        print('(HOS_DEATH)\tAKI:', sum(HOS_DEATH[np.array(AKI) == 1]), '\t Not AKI:', sum(HOS_DEATH[np.array(AKI) == 0]))
+        print('(AKI_RRT)\tAKI:', sum(AKI_RRT[np.array(AKI) == 1]), '\t Not AKI:', sum(AKI_RRT[np.array(AKI) == 0]))
+        print('(LOS)\t\tAKI (mean, sd):', np.mean(LOS[np.array(AKI) == 1]), np.std(LOS[np.array(AKI) == 1]), '\t Not AKI (mean, sd):', np.mean(LOS[np.array(AKI) == 0]), np.std(LOS[np.array(AKI) == 0]))
+        print('(ISOFA)\tAKI (mean, sd):', np.mean(ISOFA[np.array(AKI) == 1]), np.std(ISOFA[np.array(AKI) == 1]), '\t Not AKI (mean, sd):', np.mean(ISOFA[np.array(AKI) == 0]), np.std(ISOFA[np.array(AKI) == 0]))
         print('cor(HOS_DEATH, AKI):', spearmanr(HOS_DEATH, AKI))
         print('cor(AKI_RRT, AKI):', spearmanr(AKI_RRT, AKI))
         print('cor(LOS, AKI):', spearmanr(LOS, AKI))

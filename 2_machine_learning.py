@@ -189,6 +189,18 @@ if __name__ == '__main__':
     
     dataset['MIMIC']['test'] = {}
     idx = np.in1d(ICUSTAY_ID_MIMIC, np.intersect1d(np.array(testing_uniqueID), ICUSTAY_ID_MIMIC))
+    
+#    temp = pd.DataFrame(y_MIMIC)
+#    temp['ID'] = ICUSTAY_ID_MIMIC
+#    temp.drop_duplicates( inplace= True)
+#    temp.index = temp['ID']
+#    Counter(temp.loc[testing_uniqueID,0].values)
+#    Counter(temp.loc[trainval_uniqueID,0].values)
+    
+#    idx_unique = np.array([False] * len(idx))
+#    idx_unique[np.unique(ICUSTAY_ID_MIMIC[idx], return_index=True)[1]] = True
+#    idx=idx_unique
+    
     dataset['MIMIC']['test']['X'] = X_MIMIC[idx,:,:]
     dataset['MIMIC']['test']['y'] = y_MIMIC[idx]
     

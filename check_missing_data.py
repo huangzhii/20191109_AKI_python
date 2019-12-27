@@ -54,6 +54,7 @@ def check_missing(x):
     series = pd.Series([int(x[c].isnull().all()) for c in x.columns])
     series.index = x.columns
     return series
+
     
 if __name__ == '__main__':
     with open(workdir + 'Processed_Data/data_expand_MIMIC.pkl', 'rb') as f:
@@ -62,15 +63,31 @@ if __name__ == '__main__':
         data_expand_EICU = pickle.load(f)
         
     columns_missing = data_expand_EICU.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: check_missing(x))
-    columns_missing.sum(axis = 0)
+    EICU_missing = copy.deepcopy(columns_missing.sum(axis = 0))
+    EICU_missing_rate = round(EICU_missing / len(np.unique(data_expand_EICU['ICUSTAY_ID'])) * 100, 2).astype(str) + '%'
     
     columns_missing = data_expand_MIMIC.groupby(by = 'ICUSTAY_ID').progress_apply(lambda x: check_missing(x))
-    columns_missing.sum(axis = 0)
-    
+    MIMIC_missing = copy.deepcopy(columns_missing.sum(axis = 0))
+    MIMIC_missing_rate = round(MIMIC_missing / len(np.unique(data_expand_MIMIC['ICUSTAY_ID'])) * 100, 2).astype(str) + '%'
+    commonly_missing_values = pd.concat([MIMIC_missing, MIMIC_missing_rate, EICU_missing, EICU_missing_rate], axis = 1)
+    commonly_missing_values.columns = ['MIMIC-III', 'missing rate', 'eICU', 'missing rate']
+    commonly_missing_values.to_csv(workdir + 'commonly_missing_values_per_ICUSTAY_ID.csv')
     
     col_2b_removed = ['ETHNICITY','PF','ALT','AST','TBB']
     print('Remove features that has so many missing data:', col_2b_removed)
     data_expand_MIMIC.drop(col_2b_removed, axis = 1, inplace = True)
     data_expand_EICU.drop(col_2b_removed, axis = 1, inplace = True)
-    _ = imputation_on_the_fly(data_expand_MIMIC, series = 6, gap = 6)
-    _ = imputation_on_the_fly(data_expand_EICU, series = 6, gap = 6)
+    X_MIMIC, y_MIMIC, columns_MIMIC, ICUSTAY_ID_MIMIC = imputation_on_the_fly(data_expand_MIMIC, series = 6, gap = 6)
+    X_EICU, y_EICU, columns_EICU, ICUSTAY_ID_EICU = imputation_on_the_fly(data_expand_EICU, series = 6, gap = 6)
+
+
+
+    pd.DataFrame(np.unique(ICUSTAY_ID_MIMIC)).to_csv(workdir + 'Processed_Data/MIMIC_final_ICUSTAY_ID_model_6_6.csv')
+    pd.DataFrame(np.unique(ICUSTAY_ID_EICU)).to_csv(workdir + 'Processed_Data/EICU_final_ICUSTAY_ID_model_6_6.csv')
+
+
+    for s in [6, 12, 24]:
+        for g in [6, 12]:
+            print('Series: %d  Gap: %d' % (s, g))
+            _ = imputation_on_the_fly(data_expand_MIMIC, series = s, gap = g)
+            _ = imputation_on_the_fly(data_expand_EICU, series = s, gap = g)
